@@ -3,8 +3,7 @@
 > This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
 
 ## Pre-built binaries:
-- Windows / Linux: https://nightly.link/AfoninZ/MultiMC5-Cracked/workflows/main/develop
-- MacOS: https://drive.google.com/file/d/1QKjeghZecHH9foduy6dKEmpAH9AHbRTA/view?usp=sharing
+- Windows: https://github.com/rePublic-Studios/GDLauncher/releases
 
 Details about the original launcher below:
 
