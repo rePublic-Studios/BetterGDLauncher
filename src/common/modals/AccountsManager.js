@@ -86,11 +86,11 @@ const ProfileSettings = () => {
                 >
                   <div>
                     {account.selectedProfile.name}
-                    {' ('}
-                    {firstLetterCaps(
-                      account.accountType.replace('ACCOUNT_', '')
-                    )}
-                    {') '}
+                    {account.accountType
+                      ? ` (${firstLetterCaps(
+                          account.accountType.replace('ACCOUNT_', '')
+                        )})`
+                      : ``}
                     <span
                       css={`
                         color: ${props => props.theme.palette.error.main};
