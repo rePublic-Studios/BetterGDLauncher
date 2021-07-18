@@ -1,3 +1,13 @@
+> **This is a "cracked" version of a popular Minecraft launcher that lets you play the game without a Mojang account.**
+>
+> This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
+
+## Pre-built binaries:
+- Windows / Linux: https://nightly.link/AfoninZ/MultiMC5-Cracked/workflows/main/develop
+- MacOS: https://drive.google.com/file/d/1QKjeghZecHH9foduy6dKEmpAH9AHbRTA/view?usp=sharing
+
+Details about the original launcher below:
+
 # GDLauncher
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
