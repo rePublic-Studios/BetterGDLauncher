@@ -3,8 +3,9 @@ export const MC_MANIFEST_URL =
 export const MC_RESOURCES_URL = 'http://resources.download.minecraft.net';
 export const FABRIC_APIS = 'https://meta.fabricmc.net/v2';
 export const GDL_LEGACYJAVAFIXER_MOD_URL =
-  'https://gdevs.io/legacyjavafixer-1.0.jar';
+  'https://gd.tribbe.de/legacyjavafixer-1.0.jar';
 export const MOJANG_APIS = 'https://authserver.mojang.com';
+export const ELYBY_APIS = 'https://authserver.ely.by/auth';
 export const JAVA_MANIFEST_URL = 'https://cdn.assets-gdevs.com/openjdk8.json';
 export const MAVEN_REPO = 'http://central.maven.org/maven2';
 export const MC_LIBRARIES_URL = 'https://libraries.minecraft.net';
@@ -27,6 +28,7 @@ export const CURSEFORGE = 'curseforge';
 export const FTB = 'ftb';
 
 export const ACCOUNT_MOJANG = 'ACCOUNT_MOJANG';
+export const ACCOUNT_ELYBY = 'ACCOUNT_ELYBY';
 export const ACCOUNT_MICROSOFT = 'ACCOUNT_MICROSOFT';
 export const CURSEFORGE_URL = 'https://www.curseforge.com';
 export const MICROSOFT_LIVE_LOGIN_URL = 'https://login.live.com';

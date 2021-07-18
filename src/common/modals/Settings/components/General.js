@@ -113,29 +113,6 @@ const Hr = styled.div`
   height: 25px;
 `;
 
-const ReleaseChannel = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  width: 100%;
-  height: 90px;
-  color: ${props => props.theme.palette.text.third};
-  p {
-    margin-bottom: 7px;
-    color: ${props => props.theme.palette.text.secondary};
-  }
-  div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  select {
-    margin-left: auto;
-    self-align: end;
-  }
-`;
-
 const ParallelDownload = styled.div`
   display: flex;
   flex-direction: row;
@@ -211,7 +188,6 @@ function dashUuid(UUID) {
 
 const General = () => {
   const [version, setVersion] = useState(null);
-  const [releaseChannel, setReleaseChannel] = useState(null);
   const currentAccount = useSelector(_getCurrentAccount);
   const hideWindowOnGameLaunch = useSelector(
     state => state.settings.hideWindowOnGameLaunch
@@ -248,15 +224,6 @@ const General = () => {
   useEffect(() => {
     ipcRenderer.invoke('getAppVersion').then(setVersion).catch(console.error);
     extractFace(currentAccount.skin).then(setProfileImage).catch(console.error);
-    ipcRenderer
-      .invoke('getAppdataPath')
-      .then(appData =>
-        fsa
-          .readFile(path.join(appData, 'gdlauncher_next', 'rChannel'))
-          .then(v => setReleaseChannel(parseInt(v.toString(), 10)))
-          .catch(() => setReleaseChannel(0))
-      )
-      .catch(console.error);
   }, []);
 
   const clearSharedData = async () => {
@@ -369,38 +336,6 @@ const General = () => {
           </div>
         </PersonalDataContainer>
       </PersonalData>
-      <Hr />
-      <ReleaseChannel>
-        <Title>Release Channel</Title>
-        <div>
-          <div
-            css={`
-              width: 400px;
-            `}
-          >
-            Stable updates once a month, beta does update more often but it may
-            have more bugs.
-          </div>
-          <Select
-            css={`
-              width: 100px;
-            `}
-            onChange={async e => {
-              const appData = await ipcRenderer.invoke('getAppdataPath');
-              setReleaseChannel(e);
-              await fsa.writeFile(
-                path.join(appData, 'gdlauncher_next', 'rChannel'),
-                e
-              );
-            }}
-            value={releaseChannel}
-            virtual={false}
-          >
-            <Select.Option value={0}>Stable</Select.Option>
-            <Select.Option value={1}>Beta</Select.Option>
-          </Select>
-        </div>
-      </ReleaseChannel>
       <Hr />
       <Title>
         Concurrent Downloads &nbsp; <FontAwesomeIcon icon={faTachometerAlt} />

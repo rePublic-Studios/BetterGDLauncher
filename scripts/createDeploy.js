@@ -102,15 +102,15 @@ const createDeployFiles = async () => {
 const commonConfig = {
   config: {
     publish: {
-      owner: 'gorilla-devs',
-      repo: 'GDLauncher',
+      owner: 'tribbe',
+      repo: 'GDLauncher-Cracked',
       provider: 'github',
       private: false
     },
     generateUpdatesFilesForAllChannels: true,
     npmRebuild: false,
-    productName: 'GDLauncher',
-    appId: 'org.gorilladevs.GDLauncher',
+    productName: 'GDLauncher-Cracked',
+    appId: 'org.tribbe.GDLauncher',
     files: [
       '!node_modules/**/*',
       ...(process.platform === 'linux'
@@ -126,8 +126,9 @@ const commonConfig = {
       'package.json',
       'public/icon.png'
     ],
-    extraFiles:
-      process.platform === 'win32'
+    extraFiles: [
+      'required/**/*',
+      ...(process.platform === 'win32'
         ? [
             {
               from: 'vcredist/',
@@ -135,7 +136,8 @@ const commonConfig = {
               filter: '**/*'
             }
           ]
-        : [],
+        : [])
+    ],
     asar: {
       smartUnpack: false
     },

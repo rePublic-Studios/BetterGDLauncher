@@ -38,6 +38,7 @@ import {
   MICROSOFT_OAUTH_REDIRECT_URL,
   ACCOUNT_MICROSOFT,
   ACCOUNT_MOJANG,
+  ACCOUNT_ELYBY,
   FTB,
   FABRIC,
   CURSEFORGE
@@ -46,10 +47,14 @@ import {
   mcAuthenticate,
   mcRefresh,
   mcInvalidate,
+  mcElyByAuthenticate,
+  mcValidate,
+  mcElyByRefresh,
+  mcElyByInvalidate,
+  mcElyByValidate,
   getFabricManifest,
   getMcManifest,
   getForgeManifest,
-  mcValidate,
   getFabricJson,
   getAddonFile,
   getJavaManifest,
@@ -90,6 +95,7 @@ import {
   mavenToArray,
   copyAssetsToLegacy,
   getPlayerSkin,
+  getElyByPlayerSkin,
   normalizeModData,
   reflect,
   isMod,
@@ -407,6 +413,51 @@ export function login(username, password, redirect = true) {
   };
 }
 
+export function loginElyBy(username, password, redirect = true) {
+  return async (dispatch, getState) => {
+    const {
+      app: { isNewUser, clientToken }
+    } = getState();
+    if (!username || !password) {
+      throw new Error('No username or password provided');
+    }
+    try {
+      let data = null;
+      try {
+        ({ data } = await mcElyByAuthenticate(username, password, clientToken));
+        data.accountType = ACCOUNT_ELYBY;
+      } catch (err) {
+        console.error(err);
+        throw new Error('Invalid username or password.');
+      }
+
+      if (!data?.selectedProfile?.name) {
+        throw new Error("It looks like you didn't create a account.");
+      }
+      const skinUrl = await getElyByPlayerSkin(data.selectedProfile.name);
+      if (skinUrl) {
+        data.skin = skinUrl;
+      }
+      dispatch(updateAccount(data.selectedProfile.id, data));
+      dispatch(updateCurrentAccountId(data.selectedProfile.id));
+
+      if (!isNewUser) {
+        if (redirect) {
+          dispatch(push('/home'));
+        }
+      } else {
+        dispatch(updateIsNewUser(false));
+        if (redirect) {
+          dispatch(push('/onboarding'));
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      throw new Error(err);
+    }
+  };
+}
+
 export function loginWithOAuthAccessToken(redirect = true) {
   return async (dispatch, getState) => {
     const state = getState();
@@ -550,19 +601,36 @@ export function loginWithAccessToken(redirect = true) {
     const { accessToken, clientToken, selectedProfile } = currentAccount;
     if (!accessToken) throw new Error();
     try {
-      await mcValidate(accessToken, clientToken);
-      try {
-        const skinUrl = await getPlayerSkin(selectedProfile.id);
-        if (skinUrl) {
-          dispatch(
-            updateAccount(selectedProfile.id, {
-              ...currentAccount,
-              skin: skinUrl
-            })
-          );
+      if (state === ACCOUNT_MOJANG) {
+        await mcValidate(accessToken, clientToken);
+        try {
+          const skinUrl = await getPlayerSkin(selectedProfile.id);
+          if (skinUrl) {
+            dispatch(
+              updateAccount(selectedProfile.id, {
+                ...currentAccount,
+                skin: skinUrl
+              })
+            );
+          }
+        } catch (err) {
+          console.warn('Could not fetch skin');
         }
-      } catch (err) {
-        console.warn('Could not fetch skin');
+      } else if (state === ACCOUNT_ELYBY) {
+        await mcElyByValidate(accessToken, clientToken);
+        try {
+          const skinUrl = await getElyByPlayerSkin(selectedProfile.name);
+          if (skinUrl) {
+            dispatch(
+              updateAccount(selectedProfile.id, {
+                ...currentAccount,
+                skin: skinUrl
+              })
+            );
+          }
+        } catch (err) {
+          console.warn('Could not fetch skin');
+        }
       }
       dispatch(push('/home'));
     } catch (error) {
@@ -570,13 +638,23 @@ export function loginWithAccessToken(redirect = true) {
       // Trying refreshing the stored access token
       if (error.response && error.response.status === 403) {
         try {
-          const { data } = await mcRefresh(accessToken, clientToken);
-          const skinUrl = await getPlayerSkin(data.selectedProfile.id);
-          if (skinUrl) {
-            data.skin = skinUrl;
+          if (state === ACCOUNT_MOJANG) {
+            const { data } = await mcRefresh(accessToken, clientToken);
+            const skinUrl = await getPlayerSkin(data.selectedProfile.id);
+            if (skinUrl) {
+              data.skin = skinUrl;
+            }
+            dispatch(updateAccount(data.selectedProfile.id, data));
+            dispatch(updateCurrentAccountId(data.selectedProfile.id));
+          } else if (state === ACCOUNT_ELYBY) {
+            const { data } = await mcElyByRefresh(accessToken, clientToken);
+            const skinUrl = await getElyByPlayerSkin(data.selectedProfile.name);
+            if (skinUrl) {
+              data.skin = skinUrl;
+            }
+            dispatch(updateAccount(data.selectedProfile.id, data));
+            dispatch(updateCurrentAccountId(data.selectedProfile.id));
           }
-          dispatch(updateAccount(data.selectedProfile.id, data));
-          dispatch(updateCurrentAccountId(data.selectedProfile.id));
           if (redirect) {
             dispatch(push('/home'));
           }
@@ -799,7 +877,13 @@ export function logout() {
       accessToken,
       selectedProfile: { id }
     } = _getCurrentAccount(state);
-    mcInvalidate(accessToken, clientToken).catch(console.error);
+
+    if (state === ACCOUNT_MOJANG) {
+      mcInvalidate(accessToken, clientToken).catch(console.error);
+    } else if (state === ACCOUNT_ELYBY) {
+      mcElyByInvalidate(accessToken, clientToken).catch(console.error);
+    }
+
     dispatch(removeAccount(id));
     dispatch(push('/'));
   };
@@ -2505,6 +2589,7 @@ export function launchInstance(instanceName) {
     const { userData } = state;
     const account = _getCurrentAccount(state);
     const librariesPath = _getLibrariesPath(state);
+    const exeData = await ipcRenderer.invoke('getExecutablePath');
     const assetsPath = _getAssetsPath(state);
     const { memory, args } = state.settings.java;
     const { resolution: globalMinecraftResolution } =
@@ -2628,10 +2713,15 @@ export function launchInstance(instanceName) {
         ? getJVMArguments113
         : getJVMArguments112;
 
-    const javaArguments = (javaArgs !== undefined ? javaArgs : args).split(' ');
+    const javaArguments = `${
+      account.accountType === ACCOUNT_ELYBY
+        ? `-javaagent:${exeData}\\required\\authlib-injector.jar=ely.by`
+        : ``
+    } ${javaArgs !== undefined ? javaArgs : args}`.split(' ');
     const javaMem = javaMemory !== undefined ? javaMemory : memory;
     const gameResolution = instanceResolution || globalMinecraftResolution;
 
+    console.log(javaArguments);
     const jvmArguments = getJvmArguments(
       libraries,
       mcMainFile,
@@ -2924,7 +3014,7 @@ export const initLatestMods = instanceName => {
 
 export const getAppLatestVersion = async () => {
   const { data: latestReleases } = await axios.get(
-    'https://api.github.com/repos/gorilla-devs/GDLauncher/releases?per_page=10'
+    'https://api.github.com/repos/tribbe/GDLauncher/releases?per_page=10'
   );
 
   const latestPrerelease = latestReleases.find(v => v.prerelease);
@@ -2973,7 +3063,7 @@ export const checkForPortableUpdates = () => {
 
     // Latest version has a value only if the user is not using the latest
     if (latestVersion) {
-      const baseAssetUrl = `https://github.com/gorilla-devs/GDLauncher/releases/download/${latestVersion?.tag_name}`;
+      const baseAssetUrl = `https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/${latestVersion?.tag_name}`;
       const { data: latestManifest } = await axios.get(
         `${baseAssetUrl}/${process.platform}_latest.json`
       );

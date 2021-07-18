@@ -3,6 +3,7 @@ import axios from 'axios';
 import qs from 'querystring';
 import {
   MOJANG_APIS,
+  ELYBY_APIS,
   FORGESVC_URL,
   MC_MANIFEST_URL,
   FABRIC_APIS,
@@ -158,6 +159,74 @@ export const mcGetPlayerSkin = uuid => {
   );
 };
 
+export const mcInvalidate = (accessToken, clientToken) => {
+  return axios.post(
+    `${MOJANG_APIS}/invalidate`,
+    {
+      accessToken,
+      clientToken
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+};
+
+// ELY.BY API
+
+export const mcElyByAuthenticate = (username, password, clientToken) => {
+  return axios.post(
+    `${ELYBY_APIS}/authenticate`,
+    {
+      agent: {
+        name: 'Minecraft',
+        version: 1
+      },
+      username,
+      password,
+      clientToken,
+      requestUser: true
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+};
+
+export const mcElyByValidate = (accessToken, clientToken) => {
+  return axios.post(
+    `${ELYBY_APIS}/validate`,
+    {
+      accessToken,
+      clientToken
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+};
+
+export const mcElyByRefresh = (accessToken, clientToken) => {
+  return axios.post(
+    `${ELYBY_APIS}/refresh`,
+    {
+      accessToken,
+      clientToken,
+      requestUser: true
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+};
+
+export const mcElyByGetPlayerSkin = name => {
+  return axios.get(`http://skinsystem.ely.by/profile/${name}`);
+};
+
+export const mcElyByInvalidate = (accessToken, clientToken) => {
+  return axios.post(
+    `${ELYBY_APIS}/invalidate`,
+    {
+      accessToken,
+      clientToken
+    },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+};
+
 export const imgurPost = (image, onProgress) => {
   const bodyFormData = new FormData();
   bodyFormData.append('image', image);
@@ -168,17 +237,6 @@ export const imgurPost = (image, onProgress) => {
     },
     ...(onProgress && { onUploadProgress: onProgress })
   });
-};
-
-export const mcInvalidate = (accessToken, clientToken) => {
-  return axios.post(
-    `${MOJANG_APIS}/invalidate`,
-    {
-      accessToken,
-      clientToken
-    },
-    { headers: { 'Content-Type': 'application/json' } }
-  );
 };
 
 export const getMcManifest = () => {

@@ -10,8 +10,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import backgroundVideo from '../../../common/assets/onboarding.webm';
 import { _getCurrentAccount } from '../../../common/utils/selectors';
-import BisectHosting from '../../../ui/BisectHosting';
-import { openModal } from '../../../common/reducers/modals/actions';
 
 const Background = styled.div`
   position: absolute;
@@ -124,7 +122,7 @@ const Home = () => {
             padding: 0 120px;
           `}
         >
-          {account.selectedProfile.name}, welcome to GDLauncher!
+          {account.selectedProfile.name}, welcome to GDLauncher-Cracked!
         </div>
       </div>
       <div
@@ -147,22 +145,7 @@ const Home = () => {
             margin: 20% 10%;
           `}
         >
-          GDlauncher is completely free and open source. <br />
-          If you want to support us, consider renting a server on BisectHosting,
-          our official partner!
-          <br />
-          <br />
-          <div
-            css={`
-              cursor: pointer;
-            `}
-          >
-            <BisectHosting
-              showPointerCursor
-              size={100}
-              onClick={() => dispatch(openModal('BisectHosting'))}
-            />
-          </div>
+          GDlauncher-Cracked is completely free and open source.
         </div>
       </div>
       <div
@@ -191,13 +174,13 @@ const Home = () => {
               margin: 40px;
             `}
           >
-            <a href="https://www.patreon.com/gorilladevs">
+            <a href="https://www.patreon.com/tribbe">
               <img
                 css={`
                   cursor: pointer;
                 `}
                 alt="Become a Patron"
-                src="https://gdevs.io/img/become_a_patron_button.png"
+                src="https://gd.tribbe.de/img/become_a_patron_button.png"
               />
             </a>
           </div>

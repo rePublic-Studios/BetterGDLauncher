@@ -7,9 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from '../components/Modal';
 import { load } from '../reducers/loading/actions';
 import features from '../reducers/loading/features';
-import { login, loginOAuth } from '../reducers/actions';
+import { login, loginElyBy, loginOAuth } from '../reducers/actions';
 import { closeModal } from '../reducers/modals/actions';
-import { ACCOUNT_MICROSOFT, ACCOUNT_MOJANG } from '../utils/constants';
+import {
+  ACCOUNT_MICROSOFT,
+  ACCOUNT_MOJANG,
+  ACCOUNT_ELYBY
+} from '../utils/constants';
 
 const AddAccount = ({ username }) => {
   const dispatch = useDispatch();
@@ -21,6 +25,17 @@ const AddAccount = ({ username }) => {
   const addAccount = () => {
     dispatch(
       load(features.mcAuthentication, dispatch(login(email, password, false)))
+    )
+      .then(() => dispatch(closeModal()))
+      .catch(console.error);
+  };
+
+  const addElyByAccount = () => {
+    dispatch(
+      load(
+        features.mcAuthentication,
+        dispatch(loginElyBy(email, password, false))
+      )
     )
       .then(() => dispatch(closeModal()))
       .catch(console.error);
@@ -60,6 +75,35 @@ const AddAccount = ({ username }) => {
       </FormContainer>
       <FormContainer>
         <StyledButton onClick={addAccount}>Add Account</StyledButton>
+      </FormContainer>
+    </Container>
+  );
+
+  const renderAddElyByAccount = () => (
+    <Container>
+      <FormContainer>
+        <h1
+          css={`
+            height: 80px;
+          `}
+        >
+          ElyBy Login
+        </h1>
+        <StyledInput
+          disabled={!!username}
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <StyledInput
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      </FormContainer>
+      <FormContainer>
+        <StyledButton onClick={addElyByAccount}>Add Account</StyledButton>
       </FormContainer>
     </Container>
   );
@@ -117,6 +161,12 @@ const AddAccount = ({ username }) => {
             Mojang Account
           </StyledAccountMenuItem>
           <StyledAccountMenuItem
+            key={ACCOUNT_ELYBY}
+            onClick={() => setAccountType(ACCOUNT_ELYBY)}
+          >
+            Ely.By Account
+          </StyledAccountMenuItem>
+          <StyledAccountMenuItem
             key={ACCOUNT_MICROSOFT}
             onClick={() => {
               setAccountType(ACCOUNT_MICROSOFT);
@@ -127,6 +177,7 @@ const AddAccount = ({ username }) => {
           </StyledAccountMenuItem>
         </Menu>
         {accountType === ACCOUNT_MOJANG ? renderAddMojangAccount() : null}
+        {accountType === ACCOUNT_ELYBY ? renderAddElyByAccount() : null}
         {accountType === ACCOUNT_MICROSOFT ? renderAddMicrosoftAccount() : null}
       </Container>
     </Modal>

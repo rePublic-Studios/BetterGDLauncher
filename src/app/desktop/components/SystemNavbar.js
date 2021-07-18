@@ -18,7 +18,6 @@ import {
   updateUpdateAvailable,
   getAppLatestVersion
 } from '../../../common/reducers/actions';
-import BisectHosting from '../../../ui/BisectHosting';
 import Logo from '../../../ui/Logo';
 
 const SystemNavbar = () => {
@@ -169,7 +168,7 @@ const SystemNavbar = () => {
             `}
           >
             <a
-              href="https://gdevs.io/"
+              href="https://gd.tribbe.de/"
               rel="noopener noreferrer"
               css={`
                 margin-top: 5px;
@@ -179,25 +178,6 @@ const SystemNavbar = () => {
               <Logo size={35} pointerCursor />
             </a>
             <DevtoolButton />
-          </div>
-          <div
-            css={`
-              display: flex;
-              height: 100%;
-            `}
-          >
-            <div
-              css={`
-                white-space: nowrap;
-              `}
-            >
-              Partnered with &nbsp;&nbsp;
-            </div>
-            <BisectHosting
-              showPointerCursor
-              onClick={() => dispatch(openModal('BisectHosting'))}
-            />
-            {/* <PulsatingCircle /> */}
           </div>
         </>
       )}
@@ -274,23 +254,10 @@ const SystemNavbar = () => {
       </Container>
       {isOsx && (
         <>
-          <div
-            css={`
-              display: flex;
-              height: 100%;
-            `}
-          >
-            Partnered with &nbsp;&nbsp;
-            <BisectHosting
-              showPointerCursor
-              onClick={() => dispatch(openModal('BisectHosting'))}
-            />
-            {/* <PulsatingCircle /> */}
-          </div>
           <div>
             <DevtoolButton />
             <a
-              href="https://gdevs.io/"
+              href="https://gd.tribbe.de/"
               rel="noopener noreferrer"
               css={`
                 margin-top: 5px;

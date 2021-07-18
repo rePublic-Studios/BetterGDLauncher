@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const Logo = styled.svg`
   width: ${props => props.size}px;
+  margin-top: -25px;
+  margin-bottom: 15px;
   cursor: ${props => (props.pointer ? 'cursor' : 'pointer')};
   * {
     cursor: ${props => (props.pointer ? 'cursor' : 'pointer')};

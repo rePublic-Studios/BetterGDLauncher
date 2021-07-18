@@ -3,6 +3,7 @@
 > This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
 
 ## Pre-built binaries:
+
 - Windows: https://github.com/rePublic-Studios/GDLauncher/releases
 
 Details about the original launcher below:
@@ -11,8 +12,8 @@ Details about the original launcher below:
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub issues](https://img.shields.io/github/issues-raw/gorilla-devs/GDLauncher.svg)](https://github.com/gorilla-devs/GDLauncher/issues) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/213eb618fa59424fba7ccfcd4f1b6a09)](https://www.codacy.com/manual/gorilla-devs/GDLauncher?utm_source=github.com&utm_medium=referral&utm_content=gorilla-devs/GDLauncher&utm_campaign=Badge_Grade) [![GitHub pull requests](https://img.shields.io/github/issues-pr/gorilla-devs/GDLauncher.svg)](https://github.com/gorilla-devs/GDLauncher/pulls)[![PRs Welcome](https://img.shields.io/github/license/gorilla-devs/GDLauncher.svg)](http://makeapullrequest.com) ![Electron CD](https://github.com/gorilla-devs/GDLauncher/workflows/Electron%20CD/badge.svg?branch=next) ![Discord](https://img.shields.io/discord/398091532881756161.svg) ![David](https://img.shields.io/david/gorilla-devs/GDLauncher.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/gorilla-devs/GDLauncher.svg)![](https://img.shields.io/github/release/gorilla-devs/GDLauncher.svg?style=flat)
-![Github All Releases](https://img.shields.io/github/downloads/gorilla-devs/GDLauncher/total.svg)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub issues](https://img.shields.io/github/issues-raw/tribbe/GDLauncher.svg)](https://github.com/rePublic-Studios/GDLauncher-Cracked/issues) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/213eb618fa59424fba7ccfcd4f1b6a09)](https://www.codacy.com/manual/tribbe/GDLauncher?utm_source=github.com&utm_medium=referral&utm_content=tribbe/GDLauncher&utm_campaign=Badge_Grade) [![GitHub pull requests](https://img.shields.io/github/issues-pr/tribbe/GDLauncher.svg)](https://github.com/rePublic-Studios/GDLauncher-Cracked/pulls)[![PRs Welcome](https://img.shields.io/github/license/tribbe/GDLauncher.svg)](http://makeapullrequest.com) ![Electron CD](https://github.com/rePublic-Studios/GDLauncher-Cracked/workflows/Electron%20CD/badge.svg?branch=next) ![Discord](https://img.shields.io/discord/398091532881756161.svg) ![David](https://img.shields.io/david/tribbe/GDLauncher.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/tribbe/GDLauncher.svg)![](https://img.shields.io/github/release/tribbe/GDLauncher.svg?style=flat)
+![Github All Releases](https://img.shields.io/github/downloads/tribbe/GDLauncher/total.svg)
 
 <details>
  <summary><strong>Table of Contents</strong> (click to expand)
@@ -39,7 +40,7 @@ Details about the original launcher below:
   </details>
 
 <p align="center">
-    <img width="800" height="auto" src="https://gdevs.io/showcase.jpg" alt="GDLauncher" />
+    <img width="800" height="auto" src="https://gd.tribbe.de/showcase.jpg" alt="GDLauncher" />
 </p>
 
 ## 🎮 What is GDLauncher
@@ -54,16 +55,16 @@ This is an example of the time that GDLauncher takes to install a modpack in com
 - Twitch Launcher: `2.25m`
 
 <p align="center">
-    <img width="800" height="auto" src="https://gdevs.io/comparison.gif" alt="GDLauncher" />
+    <img width="800" height="auto" src="https://gd.tribbe.de/comparison.gif" alt="GDLauncher" />
 </p>
 
 ## 🚀 Getting Started
 
-Below you will find everything you need to know about the launcher. If you want to download the latest stable release you can do it from our official website ([gdevs.io](https://gdevs.io)). If you want to test the possibly unstable features, you can clone the repo and compile it yourself.
+Below you will find everything you need to know about the launcher. If you want to download the latest stable release you can do it from our official website ([gdevs.io](https://gd.tribbe.de)). If you want to test the possibly unstable features, you can clone the repo and compile it yourself.
 
 ## 🎮 Download
 
-To download the latest version, you can either click [here](https://github.com/gorilla-devs/GDLauncher/releases) and select the appropriate version for your operating system or visit our [website](https://gdevs.io).
+To download the latest version, you can either click [here](https://github.com/rePublic-Studios/GDLauncher-Cracked/releases) and select the appropriate version for your operating system or visit our [website](https://gd.tribbe.de).
 
 ## 🎨 Features
 
@@ -150,7 +151,7 @@ $ npm run release
 
 ## 🎁 Contributing
 
-You can find a list of unassigned tasks [here](https://github.com/gorilla-devs/GDLauncher/projects). Feel free to ask anything on our discord if you need help or want other tasks.
+You can find a list of unassigned tasks [here](https://github.com/rePublic-Studios/GDLauncher-Cracked/projects). Feel free to ask anything on our discord if you need help or want other tasks.
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -160,9 +161,9 @@ You can find a list of unassigned tasks [here](https://github.com/gorilla-devs/G
 
 ## ❤️ Author
 
-- **Davide Ceschia** - _Main Developer_ - [GorillaDevs](https://github.com/gorilla-devs)
+- **Davide Ceschia** - _Main Developer_ - [Tribbe](https://github.com/tribbe)
 
-See also the list of [contributors](https://github.com/gorilla-devs/GDLauncher/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/rePublic-Studios/GDLauncher-Cracked/contributors) who participated in this project.
 
 ## 📜 History
 
@@ -175,14 +176,14 @@ This is why I decided to rewrite it completely one more time, applying all the k
 
 Here you can find the previous versions of the code:
 
-- [Original C# Code](https://www.github.com/gorilla-devs/GDLauncher/tree/csharp_legacy_launcher)
-- [First React Version](https://www.github.com/gorilla-devs/GDLauncher/tree/GDLauncher_old)
+- [Original C# Code](https://www.github.com/rePublic-Studios/GDLauncher-Cracked/tree/csharp_legacy_launcher)
+- [First React Version](https://www.github.com/rePublic-Studios/GDLauncher-Cracked/tree/GDLauncher_old)
 
 ## 🎓 License
 
 This project is licensed under the GNU GPL V3.0 - see the [LICENSE](LICENSE) file for details.
 
-If you need GDLauncher licensed under different conditions, please contact davide@gdevs.io
+If you need GDLauncher licensed under different conditions, please contact tribbe@tribbe.de
 
 A simple way to keep in terms of the license is by forking this repository and leaving it open source under the same license. We love free software, seeing people use our code and then not share the code, breaking the license, is saddening. So please take a look at the license and respect what we're doing.
 

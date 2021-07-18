@@ -1,7 +1,7 @@
 {
   "name": "gdlauncher",
-  "version": "1.1.11",
-  "description": "GDLauncher is simple, yet powerful Minecraft custom launcher with a strong focus on the user experience",
+  "version": "1.2.0",
+  "description": "GDLauncher-Cracked is simple, yet powerful Minecraft custom launcher with a strong focus on the user experience",
   "keywords": [
     "minecraft",
     "launcher",
@@ -14,17 +14,17 @@
     "webpack"
   ],
   "bugs": {
-    "url": "https://github.com/gorilla-devs/GDLauncher/issues"
+    "url": "https://github.com/rePublic-Studios/GDLauncher-Cracked/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gorilla-devs/GDLauncher.git"
+    "url": "git+https://github.com/rePublic-Studios/GDLauncher-Cracked.git"
   },
   "license": "GPL-3.0",
   "author": {
-    "name": "GorillaDevs",
-    "email": "davide@gdevs.io",
-    "url": "https://gdevs.io"
+    "name": "Tribbe",
+    "email": "tribbe@tribbe.de",
+    "url": "https://gd.tribbe.de"
   },
   "private": false,
   "homepage": "./",

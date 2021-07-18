@@ -19,7 +19,11 @@ import {
   removeDuplicates,
   sortByForgeVersionDesc
 } from '../../../common/utils';
-import { getAddonFile, mcGetPlayerSkin } from '../../../common/api';
+import {
+  getAddonFile,
+  mcGetPlayerSkin,
+  mcElyByGetPlayerSkin
+} from '../../../common/api';
 import { downloadFile } from './downloader';
 
 export const isDirectory = source =>
@@ -747,6 +751,14 @@ export const downloadAddonZip = async (id, fileID, instancePath, tempPath) => {
 
 export const getPlayerSkin = async uuid => {
   const playerSkin = await mcGetPlayerSkin(uuid);
+  const { data } = playerSkin;
+  const base64 = data.properties[0].value;
+  const decoded = JSON.parse(Buffer.from(base64, 'base64').toString());
+  return decoded?.textures?.SKIN?.url;
+};
+
+export const getElyByPlayerSkin = async name => {
+  const playerSkin = await mcElyByGetPlayerSkin(name);
   const { data } = playerSkin;
   const base64 = data.properties[0].value;
   const decoded = JSON.parse(Buffer.from(base64, 'base64').toString());

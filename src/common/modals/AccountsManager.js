@@ -23,6 +23,13 @@ const ProfileSettings = () => {
   const accounts = useSelector(_getAccounts);
   const currentAccount = useSelector(_getCurrentAccount);
   const isLoading = useSelector(state => state.loading.accountAuthentication);
+
+  const firstLetterCaps = name => {
+    const firstLetter = name.substring(0, 1).toUpperCase();
+    const restLetters = name.substring(1).toLowerCase();
+    return firstLetter + restLetters;
+  };
+
   return (
     <Modal
       css={`
@@ -78,7 +85,12 @@ const ProfileSettings = () => {
                   }}
                 >
                   <div>
-                    {account.selectedProfile.name}{' '}
+                    {account.selectedProfile.name}
+                    {' ('}
+                    {firstLetterCaps(
+                      account.accountType.replace('ACCOUNT_', '')
+                    )}
+                    {') '}
                     <span
                       css={`
                         color: ${props => props.theme.palette.error.main};
