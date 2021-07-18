@@ -1,4 +1,4 @@
-> **This is a "cracked" version of a popular Minecraft launcher that lets you play the game without a Mojang account.**
+> **This is a "cracked" version of a popular Minecraft launcher that lets you play the game without a Mojang account. :)**
 >
 > This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
 
