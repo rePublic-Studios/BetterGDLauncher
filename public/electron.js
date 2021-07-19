@@ -638,7 +638,7 @@ if (process.env.REACT_APP_RELEASE_TYPE === 'setup') {
     !allowUnstableReleases && app.getVersion().includes('beta');
   autoUpdater.allowPrerelease = allowUnstableReleases;
   autoUpdater.setFeedURL({
-    owner: 'tribbe',
+    owner: 'rePublic-Studios',
     repo: 'GDLauncher-Cracked',
     provider: 'github'
   });

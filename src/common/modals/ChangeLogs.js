@@ -1,10 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { memo, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from 'antd';
 import { ipcRenderer } from 'electron';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import Modal from '../components/Modal';
 
 const ChangeLogs = () => {
@@ -52,34 +49,9 @@ const ChangeLogs = () => {
           </SectionTitle>
           <div>
             <ul>
-              <li>Various QoL fixes.</li>
+              <li>Forked and modified to cracked</li>
             </ul>
           </div>
-        </Section>
-        <Section>
-          <SectionTitle
-            css={`
-              color: ${props => props.theme.palette.colors.lavander};
-            `}
-          >
-            <span>Join Our Community</span>
-          </SectionTitle>
-          <p>
-            We love our users, that's why we have a dedicated Discord server
-            just to talk with all of them!
-          </p>
-          <Button
-            css={`
-              font-size: 20px;
-              margin-top: 20px;
-            `}
-            type="primary"
-            size="large"
-            href="https://discord.gg/4cGYzen"
-          >
-            <FontAwesomeIcon icon={faDiscord} />
-            &nbsp; Discord
-          </Button>
         </Section>
       </Container>
     </Modal>
