@@ -7,6 +7,8 @@ export const GDL_LEGACYJAVAFIXER_MOD_URL =
 export const MOJANG_APIS = 'https://authserver.mojang.com';
 export const ELYBY_APIS = 'https://authserver.ely.by/auth';
 export const JAVA_MANIFEST_URL = 'https://cdn.assets-gdevs.com/openjdk8.json';
+export const JAVA16_MANIFEST_URL =
+  'https://cdn.assets-gdevs.com/openjdk16.json';
 export const MAVEN_REPO = 'http://central.maven.org/maven2';
 export const MC_LIBRARIES_URL = 'https://libraries.minecraft.net';
 export const FORGESVC_URL = 'https://addons-ecs.forgesvc.net/api/v2';

@@ -265,9 +265,20 @@ export const getFilteredVersions = (
   return versions;
 };
 
-export const isLatestJavaDownloaded = async (meta, userData, retry) => {
+export const isLatestJavaDownloaded = async (
+  meta,
+  userData,
+  retry,
+  version
+) => {
   const javaOs = convertOSToJavaFormat(process.platform);
-  const javaMeta = meta.find(v => v.os === javaOs);
+
+  const isJava8 = version === 16;
+
+  const manifest = isJava8 ? meta.java16 : meta.java;
+  if (!manifest) return false;
+  const javaMeta = manifest.find(v => v.os === javaOs);
+  if (!javaMeta) return false;
   const javaFolder = path.join(
     userData,
     'java',

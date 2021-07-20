@@ -11,7 +11,6 @@ const getInstances = async instancesPath => {
       const configPath = path.join(
         path.join(instancesPath, instance, 'config.json')
       );
-      const rawConfig = await fs.readFile(configPath);
 
       // Remove temp config if present
       try {
@@ -23,14 +22,19 @@ const getInstances = async instancesPath => {
         // Nothing
       }
 
-      // Restore config in case of crash
-      if (rawConfig.every(v => v === 0)) {
-        const backupConfigPath = path.join(
-          path.join(instancesPath, instance, 'config.bak.json')
-        );
-        const backupConfig = await fs.readFile(backupConfigPath);
-        JSON.parse(backupConfig);
-        await fs.rename(backupConfigPath, configPath);
+      try {
+        const rawConfig = await fs.readFile(configPath);
+        // Restore config in case of crash
+        if (rawConfig.every(v => v === 0)) {
+          const backupConfigPath = path.join(
+            path.join(instancesPath, instance, 'config.bak.json')
+          );
+          const backupConfig = await fs.readFile(backupConfigPath);
+          JSON.parse(backupConfig);
+          await fs.rename(backupConfigPath, configPath);
+        }
+      } catch {
+        return null;
       }
 
       const newRawConfig = await fs.readFile(configPath);

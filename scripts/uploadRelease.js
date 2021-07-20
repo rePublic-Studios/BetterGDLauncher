@@ -25,7 +25,7 @@ const main = async () => {
 
   try {
     const { data: releasesList } = await axios.default.get(
-      `https://api.github.com/repos/tribbe/GDLauncher/releases`,
+      `https://github.com/rePublic-Studios/GDLauncher-Cracked/releases`,
       {
         headers: {
           Authorization: `token ${process.env.GH_ACCESS_TOKEN_RELEASES}`
@@ -44,7 +44,7 @@ const main = async () => {
   } catch (err) {
     console.log(err);
     const { data: newRelease } = await axios.default.post(
-      'https://api.github.com/repos/tribbe/GDLauncher/releases',
+      'https://github.com/rePublic-Studios/GDLauncher-Cracked/releases',
       {
         tag_name: `v${version}`,
         name: `v${version}`,

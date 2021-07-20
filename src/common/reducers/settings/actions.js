@@ -63,6 +63,15 @@ export function updateJavaPath(path) {
   };
 }
 
+export function updateJava16Path(path) {
+  return dispatch => {
+    dispatch({
+      type: ActionTypes.UPDATE_JAVA16_PATH,
+      path
+    });
+  };
+}
+
 export function updateJavaMemory(memory) {
   return dispatch => {
     dispatch({

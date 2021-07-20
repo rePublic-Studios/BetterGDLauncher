@@ -69,7 +69,8 @@ import {
   msAuthenticateXSTS,
   msAuthenticateMinecraft,
   msMinecraftProfile,
-  msOAuthRefresh
+  msOAuthRefresh,
+  getJava16Manifest
 } from '../api';
 import {
   _getCurrentAccount,
@@ -151,6 +152,14 @@ export function initManifests() {
       });
       return java;
     };
+    const getJava16ManifestVersions = async () => {
+      const java = (await getJava16Manifest()).data;
+      dispatch({
+        type: ActionTypes.UPDATE_JAVA16_MANIFEST,
+        data: java
+      });
+      return java;
+    };
     const getAddonCategoriesVersions = async () => {
       const curseforgeCategories = (await getAddonCategories()).data;
       dispatch({
@@ -181,9 +190,10 @@ export function initManifests() {
       return omitBy(forgeVersions, v => v.length === 0);
     };
     // Using reflect to avoid rejection
-    const [fabric, java, categories, forge] = await Promise.all([
+    const [fabric, java, java16, categories, forge] = await Promise.all([
       reflect(getFabricVersions()),
       reflect(getJavaManifestVersions()),
+      reflect(getJava16ManifestVersions()),
       reflect(getAddonCategoriesVersions()),
       reflect(getForgeVersions())
     ]);
@@ -196,6 +206,7 @@ export function initManifests() {
       mc: mc || app.vanillaManifest,
       fabric: fabric.status ? fabric.v : app.fabricManifest,
       java: java.status ? java.v : app.javaManifest,
+      java16: java16.status ? java16.v : app.java16Manifest,
       categories: categories.status ? categories.v : app.curseforgeCategories,
       forge: forge.status ? forge.v : app.forgeManifest
     };
@@ -2584,7 +2595,8 @@ export const startListener = () => {
 export function launchInstance(instanceName) {
   return async (dispatch, getState) => {
     const state = getState();
-    const defaultJavaPath = _getJavaPath(state);
+    const defaultJavaPath = _getJavaPath(state)(8);
+    const defaultJava16Path = _getJavaPath(state)(16);
 
     const { userData } = state;
     const account = _getCurrentAccount(state);
@@ -2602,7 +2614,15 @@ export function launchInstance(instanceName) {
       resolution: instanceResolution
     } = _getInstance(state)(instanceName);
 
-    const javaPath = customJavaPath || defaultJavaPath;
+    const versionGraterThan1dot17 = gt(
+      coerce(loader?.mcVersion),
+      coerce('1.17')
+    );
+
+    const defaultJavaPathVersion = versionGraterThan1dot17
+      ? defaultJava16Path
+      : defaultJavaPath;
+    const javaPath = customJavaPath || defaultJavaPathVersion;
 
     const instancePath = path.join(_getInstancesPath(state), instanceName);
 
@@ -2721,7 +2741,6 @@ export function launchInstance(instanceName) {
     const javaMem = javaMemory !== undefined ? javaMemory : memory;
     const gameResolution = instanceResolution || globalMinecraftResolution;
 
-    console.log(javaArguments);
     const jvmArguments = getJvmArguments(
       libraries,
       mcMainFile,
@@ -3014,7 +3033,7 @@ export const initLatestMods = instanceName => {
 
 export const getAppLatestVersion = async () => {
   const { data: latestReleases } = await axios.get(
-    'https://api.github.com/repos/tribbe/GDLauncher/releases?per_page=10'
+    'https://api.github.com/repos/rePublic-Studios/GDLauncher-Cracked/releases?per_page=10'
   );
 
   const latestPrerelease = latestReleases.find(v => v.prerelease);

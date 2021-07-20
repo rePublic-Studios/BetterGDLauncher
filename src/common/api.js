@@ -14,7 +14,8 @@ import {
   MICROSOFT_XBOX_LOGIN_URL,
   MICROSOFT_XSTS_AUTH_URL,
   MINECRAFT_SERVICES_URL,
-  FTB_API_URL
+  FTB_API_URL,
+  JAVA16_MANIFEST_URL
 } from './utils/constants';
 import { sortByDate } from './utils';
 
@@ -159,6 +160,18 @@ export const mcGetPlayerSkin = uuid => {
   );
 };
 
+export const imgurPost = (image, onProgress) => {
+  const bodyFormData = new FormData();
+  bodyFormData.append('image', image);
+
+  return axios.post('https://api.imgur.com/3/image', bodyFormData, {
+    headers: {
+      Authorization: `Client-ID ${IMGUR_CLIENT_ID}`
+    },
+    ...(onProgress && { onUploadProgress: onProgress })
+  });
+};
+
 export const mcInvalidate = (accessToken, clientToken) => {
   return axios.post(
     `${MOJANG_APIS}/invalidate`,
@@ -227,18 +240,6 @@ export const mcElyByInvalidate = (accessToken, clientToken) => {
   );
 };
 
-export const imgurPost = (image, onProgress) => {
-  const bodyFormData = new FormData();
-  bodyFormData.append('image', image);
-
-  return axios.post('https://api.imgur.com/3/image', bodyFormData, {
-    headers: {
-      Authorization: `Client-ID ${IMGUR_CLIENT_ID}`
-    },
-    ...(onProgress && { onUploadProgress: onProgress })
-  });
-};
-
 export const getMcManifest = () => {
   const url = `${MC_MANIFEST_URL}?timestamp=${new Date().getTime()}`;
   return axios.get(url);
@@ -256,6 +257,11 @@ export const getFabricManifest = () => {
 
 export const getJavaManifest = () => {
   const url = JAVA_MANIFEST_URL;
+  return axios.get(url);
+};
+
+export const getJava16Manifest = () => {
+  const url = JAVA16_MANIFEST_URL;
   return axios.get(url);
 };
 

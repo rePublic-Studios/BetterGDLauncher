@@ -57,6 +57,7 @@ function DesktopRoot({ store }) {
   const currentAccount = useSelector(_getCurrentAccount);
   const clientToken = useSelector(state => state.app.clientToken);
   const javaPath = useSelector(state => state.settings.java.path);
+  const java16Path = useSelector(state => state.settings.java.path16);
   const location = useSelector(state => state.router.location);
   const modals = useSelector(state => state.modals);
   const shouldShowDiscordRPC = useSelector(state => state.settings.discordRPC);
@@ -77,9 +78,12 @@ function DesktopRoot({ store }) {
     const manifests = await dispatch(initManifests());
 
     let isJavaOK = javaPath;
-
     if (!isJavaOK) {
-      isJavaOK = await isLatestJavaDownloaded(manifests.java, userData, true);
+      isJavaOK = await isLatestJavaDownloaded(manifests, userData, true, 8);
+    }
+
+    if (isJavaOK && !java16Path) {
+      isJavaOK = await isLatestJavaDownloaded(manifests, userData, true, 16);
     }
 
     if (!isJavaOK) {
