@@ -308,7 +308,7 @@ export const isLatestJavaDownloaded = async (
         }
       }
 
-      return isLatestJavaDownloaded(meta, userData);
+      return isLatestJavaDownloaded(meta, userData, false, version);
     }
 
     isValid = false;
