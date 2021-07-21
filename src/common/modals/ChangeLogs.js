@@ -20,7 +20,7 @@ const ChangeLogs = () => {
       title={`What's new in ${version}`}
     >
       <Container>
-        {/* <Section>
+        <Section>
           <SectionTitle
             css={`
               color: ${props => props.theme.palette.colors.green};
@@ -30,16 +30,12 @@ const ChangeLogs = () => {
           </SectionTitle>
           <div>
             <ul>
-              <li>
-                Automatically set recommended/minimum RAM amount for FTB
-                modpacks, and eventually show a confirmation modal in case the
-                user has not enough.
-              </li>
-              <li>Added modlist.html when exporting instances.</li>
+              <li>Added Instance Sorter</li>
+              <li>Added Java 16 for newer Minecraft versions</li>
             </ul>
           </div>
-        </Section> */}
-        <Section>
+        </Section>
+        {/* <Section>
           <SectionTitle
             css={`
               color: ${props => props.theme.palette.colors.red};
@@ -52,7 +48,7 @@ const ChangeLogs = () => {
               <li>Forked and modified to cracked</li>
             </ul>
           </div>
-        </Section>
+        </Section> */}
       </Container>
     </Modal>
   );

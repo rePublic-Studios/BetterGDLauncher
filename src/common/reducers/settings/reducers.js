@@ -24,6 +24,16 @@ function releaseChannel(state = 0, action) {
   }
 }
 
+// 0 is Alphabetical, 1 is last played, 2 is most played
+function instanceSortOrder(state = 0, action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_INSTANCE_SORT_METHOD:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 // 0 is stable, 1 is beta
 function concurrentDownloads(state = 3, action) {
   switch (action.type) {
@@ -127,6 +137,7 @@ export default combineReducers({
   potatoPcMode,
   showNews,
   curseReleaseChannel,
+  instanceSortOrder,
   java,
   minecraftSettings
 });
