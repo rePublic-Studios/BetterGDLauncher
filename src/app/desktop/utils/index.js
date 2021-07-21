@@ -901,7 +901,7 @@ export const convertcurseForgeToCanonical = (
   forgeManifest
 ) => {
   const patchedCurseForge = curseForge.replace('forge-', '');
-  const forgeEquivalent = forgeManifest[mcVersion].find(v => {
+  const forgeEquivalent = forgeManifest[mcVersion]?.find(v => {
     return v.split('-')[1] === patchedCurseForge;
   });
   return forgeEquivalent;

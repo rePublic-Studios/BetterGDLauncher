@@ -141,7 +141,7 @@ const InstanceName = ({
           loaderType: version?.loaderType,
           mcVersion: manifest.minecraft.version,
           loaderVersion: convertcurseForgeToCanonical(
-            manifest.minecraft.modLoaders.find(v => v.primary).id,
+            manifest.minecraft.modLoaders?.find(v => v.primary).id,
             manifest.minecraft.version,
             forgeManifest
           ),
