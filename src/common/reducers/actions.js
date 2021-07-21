@@ -1165,12 +1165,23 @@ export function addToQueue(
     });
 
     await makeDir(path.join(_getInstancesPath(state), instanceName));
-    lockfile.lock(
-      path.join(_getInstancesPath(state), instanceName, 'installing.lock'),
-      err => {
-        if (err) console.error(err);
-      }
+
+    const lockfilePath = path.join(
+      _getInstancesPath(state),
+      instanceName,
+      'installing.lock'
     );
+    const isLocked = await new Promise((resolve, reject) => {
+      lockfile.check(lockfilePath, (err, locked) => {
+        if (err) reject(err);
+        resolve(locked);
+      });
+    });
+    if (!isLocked) {
+      lockfile.lock(lockfilePath, err => {
+        if (err) console.error(err);
+      });
+    }
 
     dispatch(
       updateInstanceConfig(
@@ -2754,12 +2765,12 @@ export function launchInstance(instanceName) {
       resolution: instanceResolution
     } = _getInstance(state)(instanceName);
 
-    const versionGraterThan1dot17 = gt(
+    const versionGraterOrEqualThan1dot17 = gte(
       coerce(loader?.mcVersion),
       coerce('1.17')
     );
 
-    const defaultJavaPathVersion = versionGraterThan1dot17
+    const defaultJavaPathVersion = versionGraterOrEqualThan1dot17
       ? defaultJava16Path
       : defaultJavaPath;
     const javaPath = customJavaPath || defaultJavaPathVersion;
