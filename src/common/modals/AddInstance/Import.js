@@ -135,7 +135,7 @@ const Import = ({
     if (manifest.manifestType === 'minecraftModpack') {
       loader.source = CURSEFORGE;
     }
-
+    
     if (isForge) loader.loaderType = FORGE;
     else if (isFabric) loader.loaderType = FABRIC;
 
