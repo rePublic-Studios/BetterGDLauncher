@@ -2601,7 +2601,8 @@ export function launchInstance(instanceName) {
       instanceName
     );
     // We need to download the .zip file again and parse it
-    if (zipUrl && downloadInstanceZip) {
+    // Tribbe Patcher
+    if (zipUrl && downloadInstanceZip && true === false) {
       let state = getState();
       const { loader, mods } = _getInstance(state)(instanceName);
       const tempPath = _getTempPath(state);

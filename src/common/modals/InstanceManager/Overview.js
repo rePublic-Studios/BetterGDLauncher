@@ -628,7 +628,7 @@ const Overview = ({ instanceName, background, manifest }) => {
               value={zipUrl}
               onChange={e => {
                 setZipUrl(e.target.value);
-                debouncedZipUrlUpdate.callback(e.target.value);
+                debouncedZipUrlUpdate(e.target.value);
               }}
             />
           )}
