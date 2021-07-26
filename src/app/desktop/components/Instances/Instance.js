@@ -11,11 +11,11 @@ import {
   faPlay,
   faClock,
   faWrench,
-  faCopy,
   faFolder,
   faTrash,
   faStop,
-  faBoxOpen
+  faBoxOpen,
+  faCopy
 } from '@fortawesome/free-solid-svg-icons';
 import psTree from 'ps-tree';
 import { ContextMenuTrigger, ContextMenu, MenuItem } from 'react-contextmenu';
@@ -190,18 +190,14 @@ const Instance = ({ instanceName }) => {
   const openConfirmationDeleteModal = () => {
     dispatch(openModal('InstanceDeleteConfirmation', { instanceName }));
   };
-  const duplicateInstance = () => {
-    dispatch(
-      openModal('DuplicateInstance', {
-        instanceName: instance.name
-      })
-    );
-  };
   const manageInstance = () => {
     dispatch(openModal('InstanceManager', { instanceName }));
   };
   const instanceExportCurseForge = () => {
     dispatch(openModal('InstanceExportCurseForge', { instanceName }));
+  };
+  const openDuplicateNameDialog = () => {
+    dispatch(openModal('InstanceDuplicateName', { instanceName }));
   };
   const killProcess = () => {
     console.log(isPlaying.pid);
@@ -352,7 +348,7 @@ const Instance = ({ instanceName }) => {
             />
             Export Pack
           </MenuItem>
-          <MenuItem disabled={Boolean(isInQueue)} onClick={duplicateInstance}>
+          <MenuItem onClick={openDuplicateNameDialog}>
             <FontAwesomeIcon
               icon={faCopy}
               css={`
