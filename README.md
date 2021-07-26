@@ -5,8 +5,8 @@
 ## Pre-built binaries:
 
 - Windows: https://github.com/rePublic-Studios/GDLauncher-Cracked/releases
-- - direct setup: <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/v1.3.0/GDLauncher-Cracked-win-setup.exe">GDLauncher-Cracked-win-setup.exe</a>
-- - direct portable: <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/v1.3.0/GDLauncher-Cracked-win-portable.zip">GDLauncher-Cracked-win-portable.zip</a>
+- - direct setup: <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/v1.3.1/GDLauncher-Cracked-win-setup.exe">GDLauncher-Cracked-win-setup.exe</a>
+- - direct portable: <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/v1.3.1/GDLauncher-Cracked-win-portable.zip">GDLauncher-Cracked-win-portable.zip</a>
 
 Details about the original launcher below:
 
