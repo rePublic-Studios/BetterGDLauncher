@@ -27,7 +27,10 @@ const AddAccount = ({ username }) => {
       load(features.mcAuthentication, dispatch(login(email, password, false)))
     )
       .then(() => dispatch(closeModal()))
-      .catch(console.error);
+      .catch(error => {
+        console.error(error);
+        setloginFailed(error);
+      });
   };
 
   const addElyByAccount = () => {
@@ -38,7 +41,10 @@ const AddAccount = ({ username }) => {
       )
     )
       .then(() => dispatch(closeModal()))
-      .catch(console.error);
+      .catch(error => {
+        console.error(error);
+        setloginFailed(error);
+      });
   };
 
   const addMicrosoftAccount = () => {
@@ -53,13 +59,7 @@ const AddAccount = ({ username }) => {
   const renderAddMojangAccount = () => (
     <Container>
       <FormContainer>
-        <h1
-          css={`
-            height: 80px;
-          `}
-        >
-          Mojang Login
-        </h1>
+        <h1>Mojang Login</h1>
         <StyledInput
           disabled={!!username}
           placeholder="Email"
@@ -82,13 +82,12 @@ const AddAccount = ({ username }) => {
   const renderAddElyByAccount = () => (
     <Container>
       <FormContainer>
-        <h1
-          css={`
-            height: 80px;
-          `}
-        >
-          ElyBy Login
-        </h1>
+        <h1>ElyBy Login</h1>
+        {loginFailed && (
+          <>
+            <LoginFailMessage>{loginFailed?.message}</LoginFailMessage>
+          </>
+        )}
         <StyledInput
           disabled={!!username}
           placeholder="Email"

@@ -48,17 +48,22 @@ export const _getJavaPath = createSelector(
   _userData,
   (javaManifest, java, userData) => {
     // version
-    return memoize(ver => {
+    return memoize((ver = 8) => {
+      console.log(ver);
       const isVersion16 = ver === 16;
       const manifest = isVersion16
         ? javaManifest.java16Manifest
         : javaManifest.javaManifest;
 
-      // if (java.path) return java.path;
+      if (!isVersion16 && java.path) return java.path;
+      if (isVersion16 && java.path16) return java.path16;
+
       const javaOs = convertOSToJavaFormat(process.platform);
       const javaMeta = manifest.find(
-        v =>
-          v.os === javaOs && v.architecture === 'x64' && v.binary_type === 'jre'
+        version =>
+          version.os === javaOs &&
+          version.architecture === 'x64' &&
+          version.binary_type === 'jre'
       );
       const {
         version_data: { openjdk_version: version }

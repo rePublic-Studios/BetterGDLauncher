@@ -69,20 +69,17 @@ const InstanceName = ({
         setAlreadyExists(false);
         return;
       }
+      fse
+        .pathExists(path.join(instancesPath, instanceName || mcName)) // todo make case insensitiv
+        .then(exists => {
+          const newName = instanceNameSuffix(instanceName || mcName, instances);
+          setInstanceNameSufx(newName);
+
+          setAlreadyExists(exists);
+          setInvalidName(false);
+        });
     }
   }, [instanceName, step]);
-
-  useEffect(() => {
-    fse
-      .pathExists(path.join(instancesPath, instanceName || mcName))
-      .then(exists => {
-        const newName = instanceNameSuffix(instanceName || mcName, instances);
-        setInstanceNameSufx(newName);
-
-        setAlreadyExists(exists);
-        setInvalidName(false);
-      });
-  }, [step]);
 
   const imageURL = useMemo(() => {
     if (!modpack) return null;
@@ -478,7 +475,6 @@ const InstanceName = ({
                     }
                   `}
                   onClick={() => {
-                    createInstance(instanceName || mcName);
                     createInstance(instanceNameSufx || instanceName || mcName);
                     setClicked(true);
                   }}

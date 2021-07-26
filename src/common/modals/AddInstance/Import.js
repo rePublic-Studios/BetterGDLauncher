@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import path from 'path';
 import fse from 'fs-extra';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 import { promises as fs } from 'fs';
 import { extractFull } from 'node-7z';
 import { get7zPath, isMod } from '../../../app/desktop/utils';
@@ -16,10 +18,10 @@ import { CURSEFORGE, FABRIC, FORGE, VANILLA } from '../../utils/constants';
 import { transparentize } from 'polished';
 
 const Import = ({
-  setVersion,
   setModpack,
-  setImportZipPath,
+  setVersion,
   importZipPath,
+  setImportZipPath,
   setImportUpdate,
   setOverrideNextStepOnClick
 }) => {
@@ -51,10 +53,10 @@ const Import = ({
     if (loading || !localValue) return;
     setLoading(true);
     const urlRegex =
-      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*).zip$/;
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
     const isUrlRegex = urlRegex.test(localValue);
-
-    const tempFilePath = path.join(tempPath, path.basename(localValue));
+    const hash = uuidv4();
+    let tempFilePath = path.join(tempPath, `${hash}.zip`);
 
     if (isUrlRegex) {
       try {
@@ -80,6 +82,7 @@ const Import = ({
     } catch {
       await fse.remove(path.join(tempPath, 'manifest.json'));
     }
+
     const extraction = extractFull(
       isUrlRegex ? tempFilePath : localValue,
       tempPath,
@@ -135,7 +138,7 @@ const Import = ({
     if (manifest.manifestType === 'minecraftModpack') {
       loader.source = CURSEFORGE;
     }
-    
+
     if (isForge) loader.loaderType = FORGE;
     else if (isFabric) loader.loaderType = FABRIC;
 
@@ -175,7 +178,7 @@ const Import = ({
           />
           <Button disabled={loading} type="primary" onClick={openFileDialog}>
             Browse
-          </Button>
+          </Button>{' '}
         </div>
         <div
           css={`
@@ -184,7 +187,7 @@ const Import = ({
             margin-top: 20px;
           `}
         >
-          Update the instance during launch
+          Check for update during launch the instance
           <Switch
             onChange={checked => {
               setUpdateChecked(checked);

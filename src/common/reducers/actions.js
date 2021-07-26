@@ -446,7 +446,7 @@ export function loginElyBy(username, password, redirect = true) {
       }
 
       if (!data?.selectedProfile?.name) {
-        throw new Error("It looks like you didn't create a account.");
+        throw new Error("It looks like you didn't create an account.");
       }
       const skinUrl = await getElyByPlayerSkin(data.selectedProfile.name);
       if (skinUrl) {
@@ -705,6 +705,7 @@ export function loginThroughNativeLauncher() {
     );
 
     try {
+      console.log(vnlJson);
       const { clientToken } = vnlJson;
       const { account } = vnlJson.selectedUser;
       const { accessToken } = vnlJson.authenticationDatabase[account];
@@ -1013,6 +1014,7 @@ export function removeDownloadFromQueue(instanceName) {
 
 export function updateDownloadStatus(instanceName, status) {
   return dispatch => {
+    console.log(status);
     dispatch({
       type: ActionTypes.UPDATE_DOWNLOAD_STATUS,
       status,
@@ -1360,7 +1362,7 @@ export function downloadForge(instanceName) {
       await fse.copy(tempInstaller, expectedInstaller);
     }
 
-    const installForgePost152 = async () => {
+    const installForgePost152 = async (javaVer = 8) => {
       // Extract version / install json, main jar, universal and client lzma
       await extractSpecificFile('install_profile.json');
       const installerJson = await fse.readJson(
@@ -1485,14 +1487,16 @@ export function downloadForge(instanceName) {
             `${forgeJson.install.minecraft}.jar`
           ),
           _getLibrariesPath(state),
-          _getJavaPath(state),
+          _getJavaPath(state)(javaVer),
           (d, t) => dispatch(updateDownloadProgress((d * 100) / t))
         );
       }
     };
 
     if (gt(coerce(loader?.mcVersion), coerce('1.5.2'))) {
-      await installForgePost152();
+      await installForgePost152(8);
+    } else if (gte(coerce(loader?.mcVersion), coerce('1.7.1'))) {
+      await installForgePost152(16);
     } else {
       // Download necessary libs
       const fmllibs = fmlLibsMapping[loader?.mcVersion];
@@ -1907,7 +1911,7 @@ export function downloadInstance(instanceName) {
     try {
       mcJson = await fse.readJson(mcJsonPath);
     } catch (err) {
-      const versionURL = mcVersions.find(v => v.id === mcVersion).url;
+      const versionURL = mcVersions.find(v => v.id === mcVersion).url; // Eyüphan 02
       mcJson = (await axios.get(versionURL)).data;
       await fse.outputJson(mcJsonPath, mcJson);
     }

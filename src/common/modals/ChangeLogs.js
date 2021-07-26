@@ -30,8 +30,9 @@ const ChangeLogs = () => {
           </SectionTitle>
           <div>
             <ul>
-              <li>Added Instance Sorter</li>
-              <li>Added Java 16 for newer Minecraft versions</li>
+              <li>Major stability fixxes</li>
+              <li>Patched Download Bug for new forge versions</li>
+              <li>All known Bugs are fixxed</li>
             </ul>
           </div>
         </Section>
