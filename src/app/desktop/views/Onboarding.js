@@ -216,7 +216,7 @@ const Home = () => {
             css={`
               margin-top: 40px;
             `}
-            src="https://discordapp.com/widget?id=398091532881756161&theme=dark"
+            src="https://discordapp.com/widget?id=864825977488801792&theme=dark"
             width="350"
             height="410"
             allowTransparency="true"

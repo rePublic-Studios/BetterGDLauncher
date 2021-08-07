@@ -21,7 +21,7 @@ exports.initRPC = () => {
     client.setActivity(activity);
   });
 
-  client.login({ clientId: '555898932467597312' }).catch(error => {
+  client.login({ clientId: '865132231684915200' }).catch(error => {
     if (error.message.includes('ENOENT')) {
       log.error('Unable to initialize Discord RPC, no client detected.');
     } else {
