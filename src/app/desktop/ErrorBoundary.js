@@ -52,7 +52,7 @@ export default class ErrorBoundary extends React.Component {
               color: ${props => props.theme.palette.text.primary};
             `}
           >
-            WE’RE SSSSSSORRY. GDLauncher ran into a creeper and blew up..
+            WE’RE SSSSSSORRY. BetterGDLauncher ran into a creeper and blew up..
           </h1>
           <div
             css={`
@@ -71,7 +71,7 @@ export default class ErrorBoundary extends React.Component {
               margin-top: 30px;
             `}
           >
-            Restart GDLauncher
+            Restart BetterGDLauncher
           </Button>
         </div>
       );

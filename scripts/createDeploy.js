@@ -103,14 +103,14 @@ const commonConfig = {
   config: {
     publish: {
       owner: 'tribbe',
-      repo: 'GDLauncher-Cracked',
+      repo: 'BetterGDLauncher',
       provider: 'github',
       private: false
     },
     generateUpdatesFilesForAllChannels: true,
     npmRebuild: false,
-    productName: 'GDLauncher-Cracked',
-    appId: 'org.tribbe.GDLauncher',
+    productName: 'BetterGDLauncher',
+    appId: 'org.tribbe.BetterGDLauncher',
     files: [
       '!node_modules/**/*',
       ...(process.platform === 'linux'
@@ -186,9 +186,9 @@ const commonConfig = {
     },
     protocols: [
       {
-        name: 'gdlauncher',
+        name: 'bettergdlauncher',
         role: 'Viewer',
-        schemes: ['gdlauncher']
+        schemes: ['bettergdlauncher']
       }
     ]
   },

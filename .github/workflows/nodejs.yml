@@ -1,4 +1,4 @@
-name: GDLauncher Next CI
+name: BetterGDLauncher Next CI
 
 on:
   push:

@@ -18,9 +18,9 @@ const AutoUpdatesNotAvailable = () => {
             margin-top: 20px;
           `}
         >
-          Please, update GDLauncher-Cracked through your package manager or
+          Please, update BetterGDLauncher through your package manager or
           download the new version from our github{' '}
-          <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases">
+          <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases">
             here
           </a>
         </div>

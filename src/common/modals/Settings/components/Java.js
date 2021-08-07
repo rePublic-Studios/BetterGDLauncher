@@ -163,7 +163,7 @@ export default function MyAccountPreferences() {
           `}
         >
           Disable this to specify a custom java path to use instead of using
-          openJDK shipped with GDLauncher. Please select the java.exe binary
+          openJDK shipped with BetterGDLauncher. Please select the java.exe binary
         </Paragraph>
         <Switch
           color="primary"

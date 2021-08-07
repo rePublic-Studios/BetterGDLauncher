@@ -58,8 +58,8 @@ if (gotTheLock) {
   app.quit();
 }
 
-if (!app.isDefaultProtocolClient('gdlauncher')) {
-  app.setAsDefaultProtocolClient('gdlauncher');
+if (!app.isDefaultProtocolClient('bettergdlauncher')) {
+  app.setAsDefaultProtocolClient('bettergdlauncher');
 }
 
 // This gets rid of this: https://github.com/electron/electron/issues/13186
@@ -72,10 +72,10 @@ const edit = [
   ...(process.platform === 'darwin'
     ? [
         {
-          label: 'GDLauncher',
+          label: 'BetterGDLauncher',
           submenu: [
             {
-              label: 'About GDLauncher',
+              label: 'About BetterGDLauncher',
               role: 'about'
             },
             { type: 'separator' },
@@ -86,7 +86,7 @@ const edit = [
             },
             { type: 'separator' },
             {
-              label: 'Hide GDLauncher',
+              label: 'Hide BetterGDLauncher',
               accelerator: 'Command+H',
               role: 'hide'
             },
@@ -101,7 +101,7 @@ const edit = [
             },
             { type: 'separator' },
             {
-              label: 'Quit GDLauncher',
+              label: 'Quit BetterGDLauncher',
               accelerator: 'Command+Q',
               click: () => {
                 app.quit();
@@ -315,7 +315,7 @@ function createWindow() {
   tray = new Tray(nimage);
   const trayMenuTemplate = [
     {
-      label: 'GDLauncher',
+      label: 'BetterGDLauncher',
       enabled: false
     },
     {
@@ -326,7 +326,7 @@ function createWindow() {
 
   const trayMenu = Menu.buildFromTemplate(trayMenuTemplate);
   tray.setContextMenu(trayMenu);
-  tray.setToolTip('GDLauncher');
+  tray.setToolTip('BetterGDLauncher');
   tray.on('double-click', () => mainWindow.show());
 
   mainWindow.loadURL(
@@ -334,7 +334,7 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../build/index.html')}`,
     {
-      userAgent: 'GDLauncher'
+      userAgent: 'BetterGDLauncher'
     }
   );
   if (isDev) {
@@ -639,7 +639,7 @@ if (process.env.REACT_APP_RELEASE_TYPE === 'setup') {
   autoUpdater.allowPrerelease = allowUnstableReleases;
   autoUpdater.setFeedURL({
     owner: 'rePublic-Studios',
-    repo: 'GDLauncher-Cracked',
+    repo: 'BetterGDLauncher',
     provider: 'github'
   });
 

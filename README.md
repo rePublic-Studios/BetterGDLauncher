@@ -1,28 +1,28 @@
 > **This is a "cracked" version of a popular Minecraft launcher that lets you play the game without a Mojang account. :)**
 >
-> This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
+> This software is not related to BetterGDLauncher developers and provided without any warranty. Please don't bomb BetterGDLauncher developers if something gets wrong using this launcher.
 
 ## Pre-built binaries:
 
-- Windows: https://github.com/rePublic-Studios/GDLauncher-Cracked/releases
-- - direct setup: <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/v1.3.1/GDLauncher-Cracked-win-setup.exe">GDLauncher-Cracked-win-setup.exe</a>
-- - direct portable: <a href="https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/v1.3.1/GDLauncher-Cracked-win-portable.zip">GDLauncher-Cracked-win-portable.zip</a>
+- Windows: https://github.com/rePublic-Studios/BetterGDLauncher/releases
+- - direct setup: <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.0/BetterGDLauncher-win-setup.exe">BetterGDLauncher-win-setup.exe</a>
+- - direct portable: <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.0/BetterGDLauncher-win-portable.zip">BetterGDLauncher-win-portable.zip</a>
 
 Details about the original launcher below:
 
-# GDLauncher
+# BetterGDLauncher
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub issues](https://img.shields.io/github/issues-raw/gorilla-devs/GDLauncher.svg)](https://github.com/gorilla-devs/GDLauncher/issues) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/213eb618fa59424fba7ccfcd4f1b6a09)](https://www.codacy.com/manual/gorilla-devs/GDLauncher?utm_source=github.com&utm_medium=referral&utm_content=gorilla-devs/GDLauncher&utm_campaign=Badge_Grade) [![GitHub pull requests](https://img.shields.io/github/issues-pr/gorilla-devs/GDLauncher.svg)](https://github.com/gorilla-devs/GDLauncher/pulls)[![PRs Welcome](https://img.shields.io/github/license/gorilla-devs/GDLauncher.svg)](http://makeapullrequest.com) ![Electron CD](https://github.com/gorilla-devs/GDLauncher/workflows/Electron%20CD/badge.svg?branch=next) ![Discord](https://img.shields.io/discord/398091532881756161.svg) ![David](https://img.shields.io/david/gorilla-devs/GDLauncher.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/gorilla-devs/GDLauncher.svg)![](https://img.shields.io/github/release/gorilla-devs/GDLauncher.svg?style=flat)
-![Github All Releases](https://img.shields.io/github/downloads/gorilla-devs/GDLauncher/total.svg)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub issues](https://img.shields.io/github/issues-raw/gorilla-devs/BetterGDLauncher.svg)](https://github.com/gorilla-devs/BetterGDLauncher/issues) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/213eb618fa59424fba7ccfcd4f1b6a09)](https://www.codacy.com/manual/gorilla-devs/BetterGDLauncher?utm_source=github.com&utm_medium=referral&utm_content=gorilla-devs/BetterGDLauncher&utm_campaign=Badge_Grade) [![GitHub pull requests](https://img.shields.io/github/issues-pr/gorilla-devs/BetterGDLauncher.svg)](https://github.com/gorilla-devs/BetterGDLauncher/pulls)[![PRs Welcome](https://img.shields.io/github/license/gorilla-devs/BetterGDLauncher.svg)](http://makeapullrequest.com) ![Electron CD](https://github.com/gorilla-devs/BetterGDLauncher/workflows/Electron%20CD/badge.svg?branch=next) ![Discord](https://img.shields.io/discord/398091532881756161.svg) ![David](https://img.shields.io/david/gorilla-devs/BetterGDLauncher.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/gorilla-devs/BetterGDLauncher.svg)![](https://img.shields.io/github/release/gorilla-devs/BetterGDLauncher.svg?style=flat)
+![Github All Releases](https://img.shields.io/github/downloads/gorilla-devs/BetterGDLauncher/total.svg)
 
 <details>
  <summary><strong>Table of Contents</strong> (click to expand)
 </summary>
 
-- [GDLauncher](#gdlauncher)
-  - [🎮 What is GDLauncher](#-what-is-gdlauncher)
+- [BetterGDLauncher](#bettergdlauncher)
+  - [🎮 What is BetterGDLauncher](#-what-is-bettergdlauncher)
   - [⚡️ Comparison with Twitch Launcher](#-comparison-with-twitch-launcher)
   - [🚀 Getting Started](#-getting-started)
   - [🎮 Download](#-download)
@@ -42,22 +42,22 @@ Details about the original launcher below:
   </details>
 
 <p align="center">
-    <img width="800" height="auto" src="https://gdevs.io/showcase.jpg" alt="GDLauncher" />
+    <img width="800" height="auto" src="https://gdevs.io/showcase.jpg" alt="BetterGDLauncher" />
 </p>
 
-## 🎮 What is GDLauncher
+## 🎮 What is BetterGDLauncher
 
-GDLauncher is a custom open-source Minecraft launcher written from the ground up in electron/react. Its main goal is to make it easy and enjoyable to manage different Minecraft versions and install `forge/fabric`, bringing the playing and modding experience to the next level!
+BetterGDLauncher is a custom open-source Minecraft launcher written from the ground up in electron/react. Its main goal is to make it easy and enjoyable to manage different Minecraft versions and install `forge/fabric`, bringing the playing and modding experience to the next level!
 
 ## ⚡️ Comparison with Twitch Launcher
 
-This is an example of the time that GDLauncher takes to install a modpack in comparison to Twitch. Both tests are running at the same time over a 1Gbps network to ensure that the network doesn't impact the comparison.
+This is an example of the time that BetterGDLauncher takes to install a modpack in comparison to Twitch. Both tests are running at the same time over a 1Gbps network to ensure that the network doesn't impact the comparison.
 
-- GDLauncher: `0.52m`
+- BetterGDLauncher: `0.52m`
 - Twitch Launcher: `2.25m`
 
 <p align="center">
-    <img width="800" height="auto" src="https://gdevs.io/comparison.gif" alt="GDLauncher" />
+    <img width="800" height="auto" src="https://gdevs.io/comparison.gif" alt="BetterGDLauncher" />
 </p>
 
 ## 🚀 Getting Started
@@ -66,7 +66,7 @@ Below you will find everything you need to know about the launcher. If you want 
 
 ## 🎮 Download
 
-To download the latest version, you can either click [here](https://github.com/gorilla-devs/GDLauncher/releases) and select the appropriate version for your operating system or visit our [website](https://gdevs.io).
+To download the latest version, you can either click [here](https://github.com/gorilla-devs/BetterGDLauncher/releases) and select the appropriate version for your operating system or visit our [website](https://gdevs.io).
 
 ## 🎨 Features
 
@@ -112,7 +112,7 @@ You need the following software installed:
 Install the dependencies and devDependencies.
 
 ```sh
-$ cd GDLauncher
+$ cd BetterGDLauncher
 $ npm i
 ```
 
@@ -153,7 +153,7 @@ $ npm run release
 
 ## 🎁 Contributing
 
-You can find a list of unassigned tasks [here](https://github.com/gorilla-devs/GDLauncher/projects). Feel free to ask anything on our discord if you need help or want other tasks.
+You can find a list of unassigned tasks [here](https://github.com/gorilla-devs/BetterGDLauncher/projects). Feel free to ask anything on our discord if you need help or want other tasks.
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -165,7 +165,7 @@ You can find a list of unassigned tasks [here](https://github.com/gorilla-devs/G
 
 - **Davide Ceschia** - _Main Developer_ - [GorillaDevs](https://github.com/gorilla-devs)
 
-See also the list of [contributors](https://github.com/gorilla-devs/GDLauncher/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/gorilla-devs/BetterGDLauncher/contributors) who participated in this project.
 
 ## 📜 History
 
@@ -178,14 +178,14 @@ This is why I decided to rewrite it completely one more time, applying all the k
 
 Here you can find the previous versions of the code:
 
-- [Original C# Code](https://www.github.com/gorilla-devs/GDLauncher/tree/csharp_legacy_launcher)
-- [First React Version](https://www.github.com/gorilla-devs/GDLauncher/tree/GDLauncher_old)
+- [Original C# Code](https://www.github.com/gorilla-devs/BetterGDLauncher/tree/csharp_legacy_launcher)
+- [First React Version](https://www.github.com/gorilla-devs/BetterGDLauncher/tree/GDLauncher_old)
 
 ## 🎓 License
 
 This project is licensed under the GNU GPL V3.0 - see the [LICENSE](LICENSE) file for details.
 
-If you need GDLauncher licensed under different conditions, please contact davide@gdevs.io
+If you need BetterGDLauncher licensed under different conditions, please contact davide@gdevs.io
 
 A simple way to keep in terms of the license is by forking this repository and leaving it open source under the same license. We love free software, seeing people use our code and then not share the code, breaking the license, is saddening. So please take a look at the license and respect what we're doing.
 

@@ -3188,7 +3188,7 @@ export const initLatestMods = instanceName => {
 
 export const getAppLatestVersion = async () => {
   const { data: latestReleases } = await axios.get(
-    'https://api.github.com/repos/rePublic-Studios/GDLauncher-Cracked/releases?per_page=10'
+    'https://api.github.com/repos/rePublic-Studios/BetterGDLauncher/releases?per_page=10'
   );
 
   const latestPrerelease = latestReleases.find(v => v.prerelease);
@@ -3237,7 +3237,7 @@ export const checkForPortableUpdates = () => {
 
     // Latest version has a value only if the user is not using the latest
     if (latestVersion) {
-      const baseAssetUrl = `https://github.com/rePublic-Studios/GDLauncher-Cracked/releases/download/${latestVersion?.tag_name}`;
+      const baseAssetUrl = `https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/${latestVersion?.tag_name}`;
       const { data: latestManifest } = await axios.get(
         `${baseAssetUrl}/${process.platform}_latest.json`
       );

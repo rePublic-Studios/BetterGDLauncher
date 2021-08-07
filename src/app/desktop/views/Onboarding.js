@@ -122,7 +122,7 @@ const Home = () => {
             padding: 0 120px;
           `}
         >
-          {account.selectedProfile.name}, welcome to GDLauncher-Cracked!
+          {account.selectedProfile.name}, welcome to BetterGDLauncher!
         </div>
       </div>
       <div
@@ -145,7 +145,7 @@ const Home = () => {
             margin: 20% 10%;
           `}
         >
-          GDlauncher-Cracked is completely free and open source.
+          BetterGDLauncher is completely free and open source.
         </div>
       </div>
       <div

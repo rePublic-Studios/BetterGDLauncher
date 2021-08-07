@@ -221,7 +221,7 @@ const InstancesMigration = () => {
             color: ${props => props.theme.palette.text.secondary};
           `}
         >
-          Please, do NOT close GDLauncher.
+          Please, do NOT close BetterGDLauncher.
         </div>
         <div
           css={`
