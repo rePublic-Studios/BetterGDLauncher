@@ -801,6 +801,7 @@ export const getPlayerSkin = async uuid => {
 
 export const getElyByPlayerSkin = async name => {
   const playerSkin = await mcElyByGetPlayerSkin(name);
+  if (playerSkin.status === 204) return null;
   const { data } = playerSkin;
   const base64 = data.properties[0].value;
   const decoded = JSON.parse(Buffer.from(base64, 'base64').toString());
