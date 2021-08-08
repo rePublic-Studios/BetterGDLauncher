@@ -31,6 +31,7 @@ export const FTB = 'ftb';
 
 export const ACCOUNT_MOJANG = 'ACCOUNT_MOJANG';
 export const ACCOUNT_ELYBY = 'ACCOUNT_ELYBY';
+export const ACCOUNT_LOCAL = 'ACCOUNT_LOCAL';
 export const ACCOUNT_MICROSOFT = 'ACCOUNT_MICROSOFT';
 export const CURSEFORGE_URL = 'https://www.curseforge.com';
 export const MICROSOFT_LIVE_LOGIN_URL = 'https://login.live.com';

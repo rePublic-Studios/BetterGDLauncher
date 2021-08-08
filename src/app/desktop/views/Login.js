@@ -10,13 +10,15 @@ import {
   faCheckCircle,
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
-import { Input, Button, Menu } from 'antd';
+import { Input, Button, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import { useKey } from 'rooks';
 import axios from 'axios';
 import {
   login,
   loginElyBy,
-  loginOAuth
+  loginOAuth,
+  loginLocal
 } from '../../../common/reducers/actions';
 import { load, requesting } from '../../../common/reducers/loading/actions';
 import features from '../../../common/reducers/loading/features';
@@ -24,9 +26,10 @@ import backgroundVideo from '../../../common/assets/background.webm';
 import HorizontalLogo from '../../../ui/HorizontalLogo';
 import { openModal } from '../../../common/reducers/modals/actions';
 import {
-  ACCOUNT_MICROSOFT,
   ACCOUNT_MOJANG,
-  ACCOUNT_ELYBY
+  ACCOUNT_ELYBY,
+  ACCOUNT_MICROSOFT,
+  ACCOUNT_LOCAL
 } from '../../../common/utils/constants';
 
 const LoginButton = styled(Button)`
@@ -36,7 +39,6 @@ const LoginButton = styled(Button)`
     props.active ? props.theme.palette.grey[600] : 'transparent'};
   border: 0;
   height: auto;
-  margin-top: -5px;
   text-align: center;
   color: ${props => props.theme.palette.text.primary};
   &:hover {
@@ -80,7 +82,6 @@ const Form = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin: 40px 0 !important;
 `;
 
 const Background = styled.div`
@@ -182,6 +183,7 @@ const Login = () => {
   const [version, setVersion] = useState(null);
   const [loginFailed, setLoginFailed] = useState(false);
   const [status, setStatus] = useState({});
+  const [selectedSerivce, setSelectedService] = useState('Mojang Account');
   const loading = useSelector(
     state => state.loading.accountAuthentication.isRequesting
   );
@@ -224,6 +226,19 @@ const Login = () => {
           setLoginFailed(e);
         }
       );
+    }, 1000);
+  };
+
+  const authenticateLocal = () => {
+    dispatch(requesting('accountAuthentication'));
+    setTimeout(() => {
+      dispatch(
+        load(features.mcAuthentication, dispatch(loginLocal(email)))
+      ).catch(e => {
+        console.error(e);
+        setLoginFailed(e);
+        setPassword(null);
+      });
     }, 1000);
   };
 
@@ -406,6 +421,59 @@ const Login = () => {
     </Container>
   );
 
+  const renderLoginLocalAccount = () => (
+    <Container>
+      <p>Sign in without an Account</p>
+      <Form>
+        <div>
+          <Input
+            placeholder="Username"
+            value={email}
+            onChange={({ target: { value } }) => setEmail(value)}
+          />
+        </div>
+        <LoginButton color="primary" onClick={authenticateLocal}>
+          Sign In
+          <FontAwesomeIcon
+            css={`
+              margin-left: 6px;
+            `}
+            icon={faArrowRight}
+          />
+        </LoginButton>
+      </Form>
+      <Footer>
+        <div
+          css={`
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+          `}
+        >
+          <FooterLinks>
+            <div>
+              <a href="https://account.ely.by/register">CREATE AN ACCOUNT</a>
+            </div>
+            <div>
+              <a href="https://account.ely.by/forgot-password">
+                FORGOT PASSWORD
+              </a>
+            </div>
+          </FooterLinks>
+          <div
+            css={`
+              cursor: pointer;
+            `}
+            onClick={() => dispatch(openModal('ChangeLogs'))}
+          >
+            v{version}
+          </div>
+        </div>
+      </Footer>
+    </Container>
+  );
+
   const fetchStatus = async () => {
     const { data } = await axios.get('https://status.mojang.com/check');
     const result = {};
@@ -420,6 +488,56 @@ const Login = () => {
     fetchStatus().catch(console.error);
   }, []);
 
+  const menu = (
+    <Menu
+      mode="horizontal"
+      selectedKeys={[accountType]}
+      overflowedIndicator={null}
+    >
+      <StyledAccountMenuItem
+        key={ACCOUNT_MOJANG}
+        onClick={() => {
+          setAccountType(ACCOUNT_MOJANG);
+          setLoginFailed(null);
+          setSelectedService('Mojang Account');
+        }}
+      >
+        Mojang Account
+      </StyledAccountMenuItem>
+      <StyledAccountMenuItem
+        key={ACCOUNT_ELYBY}
+        onClick={() => {
+          setAccountType(ACCOUNT_ELYBY);
+          setLoginFailed(null);
+          setSelectedService('Ely.By Account');
+        }}
+      >
+        Ely.By Account
+      </StyledAccountMenuItem>
+      <StyledAccountMenuItem
+        key={ACCOUNT_MICROSOFT}
+        onClick={() => {
+          setAccountType(ACCOUNT_MICROSOFT);
+          authenticateMicrosoft();
+          setLoginFailed(null);
+          setSelectedService('Microsoft Account');
+        }}
+      >
+        Microsoft Account
+      </StyledAccountMenuItem>
+      <StyledAccountMenuItem
+        key={ACCOUNT_LOCAL}
+        onClick={() => {
+          setAccountType(ACCOUNT_LOCAL);
+          setLoginFailed(null);
+          setSelectedService('Offline Account');
+        }}
+      >
+        Offline Account
+      </StyledAccountMenuItem>
+    </Menu>
+  );
+
   return (
     <Transition in={loading} timeout={300}>
       {transitionState => (
@@ -428,38 +546,24 @@ const Login = () => {
             <Header>
               <HorizontalLogo size={200} margin={15} />
             </Header>
-            <Menu
-              mode="horizontal"
-              selectedKeys={[accountType]}
-              overflowedIndicator={null}
+            <Dropdown
+              overlay={menu}
+              css={`
+                width: 100%;
+                height: 40px;
+              `}
+              trigger="click"
             >
-              <StyledAccountMenuItem
-                key={ACCOUNT_MOJANG}
-                onClick={() => setAccountType(ACCOUNT_MOJANG)}
-              >
-                Mojang Account
-              </StyledAccountMenuItem>
-              <StyledAccountMenuItem
-                key={ACCOUNT_ELYBY}
-                onClick={() => setAccountType(ACCOUNT_ELYBY)}
-              >
-                Ely.By Account
-              </StyledAccountMenuItem>
-              <StyledAccountMenuItem
-                key={ACCOUNT_MICROSOFT}
-                onClick={() => {
-                  setAccountType(ACCOUNT_MICROSOFT);
-                  authenticateMicrosoft();
-                }}
-              >
-                Microsoft Account
-              </StyledAccountMenuItem>
-            </Menu>
+              <Button>
+                {selectedSerivce} <DownOutlined />
+              </Button>
+            </Dropdown>
             {accountType === ACCOUNT_MOJANG ? renderLoginMojangAccount() : null}
             {accountType === ACCOUNT_ELYBY ? renderLoginElyByAccount() : null}
             {accountType === ACCOUNT_MICROSOFT
               ? renderLoginMicrosoftAccount()
               : null}
+            {accountType === ACCOUNT_LOCAL ? renderLoginLocalAccount() : null}
           </LeftSide>
           <Background transitionState={transitionState}>
             <video autoPlay muted loop>
