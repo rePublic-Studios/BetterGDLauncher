@@ -2,6 +2,11 @@
 >
 > This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
 
+
+## You can join us here:
+  [Discord](https://discord.gg/tzebdd9AsM)
+  
+  
 ## Pre-built binaries:
 
 - All releases: https://github.com/rePublic-Studios/BetterGDLauncher/releases
@@ -13,6 +18,7 @@
 <p align="center">
     <img width="800" height="auto" src="https://gdevs.io/showcase.jpg" alt="BetterGDLauncher" />
 </p>
+
 
 ## 🎮 What is BetterGDLauncher
 
