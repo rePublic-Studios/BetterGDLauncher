@@ -32,9 +32,8 @@ const Home = () => {
   const secondSlideRef = useRef(null);
   const thirdSlideRef = useRef(null);
   const forthSlideRef = useRef(null);
-  const fifthSlideRef = useRef(null);
   const executeScroll = type => {
-    if (currentSlide + type < 0 || currentSlide + type > 5) return;
+    if (currentSlide + type < 0 || currentSlide + type > 4) return;
     setCurrentSlide(currentSlide + type);
     switch (currentSlide + type) {
       case 0:
@@ -48,9 +47,6 @@ const Home = () => {
         break;
       case 3:
         scrollToRef(forthSlideRef);
-        break;
-      case 4:
-        scrollToRef(fifthSlideRef);
         break;
       default:
         scrollToRef(firstSlideRef);
@@ -150,44 +146,6 @@ const Home = () => {
       </div>
       <div
         ref={forthSlideRef}
-        css={`
-          height: 100%;
-          width: 100%;
-          background: ${props => props.theme.palette.grey[800]};
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        `}
-      >
-        <div
-          css={`
-            font-size: 30px;
-            font-weight: 600;
-            text-align: center;
-            margin: 20%;
-          `}
-        >
-          Or you can also support us through Patreon.
-          <div
-            css={`
-              margin: 40px;
-            `}
-          >
-            <a href="https://www.patreon.com/tribbe">
-              <img
-                css={`
-                  cursor: pointer;
-                `}
-                alt="Become a Patron"
-                src="https://gd.tribbe.de/img/become_a_patron_button.png"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        ref={fifthSlideRef}
         css={`
           height: 100%;
           width: 100%;

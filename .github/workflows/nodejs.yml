@@ -46,7 +46,7 @@ jobs:
           CIRCLE_TAG: ''
           BITRISE_GIT_TAG: ''
           CI_BUILD_TAG: ''
-          RELEASE_TESTING: true
+          RELEASE_TESTING: false
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
           CSC_LINK: ${{ secrets.CSC_LINK }}
         run: |
@@ -60,7 +60,7 @@ jobs:
           CIRCLE_TAG: ''
           BITRISE_GIT_TAG: ''
           CI_BUILD_TAG: ''
-          RELEASE_TESTING: true
+          RELEASE_TESTING: false
         run: |
           npm run release
       - name: upload release to gh releases
