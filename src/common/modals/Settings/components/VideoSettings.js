@@ -2,12 +2,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-import { Slider, InputNumber, Row, Col } from 'antd';
+import { Slider, InputNumber, Row, Col, Switch } from 'antd';
 import { faBinoculars } from '@fortawesome/free-solid-svg-icons';
 import {
   updateFOV,
   updateFPS,
-  updateRenderDistance
+  updateRenderDistance,
+  updateVSync
 } from '../../../reducers/settings/actions';
 
 const VideoSettings = styled.div`
@@ -43,6 +44,18 @@ const Hr = styled.div`
   height: 35px;
 `;
 
+const VSyncSelection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  p {
+    text-align: left;
+    color: ${props => props.theme.palette.text.third};
+  }
+`;
+
 function getMarksFOV() {
   const totalMarks = {};
   totalMarks[30] = 'Minimum';
@@ -75,6 +88,7 @@ const VideoSetting = () => {
 
   const fov = useSelector(state => state.settings.fov);
   const fps = useSelector(state => state.settings.fps);
+  const vsync = useSelector(state => state.settings.vsync);
   const renderDistance = useSelector(state => state.settings.renderDistance);
 
   return (
@@ -82,6 +96,29 @@ const VideoSetting = () => {
       <MainTitle>Video Settings</MainTitle>
 
       <Hr />
+
+      <Title
+        css={`
+          margin-top: 0px;
+        `}
+      >
+        V-Sync &nbsp;
+      </Title>
+      <VSyncSelection>
+        <p
+          css={`
+                  width: 350px;y
+                  `}
+        >
+          Whether v-sync (vertical synchronization) is enabled
+        </p>
+        <Switch
+          onChange={e => {
+            dispatch(updateVSync(e));
+          }}
+          checked={vsync}
+        />
+      </VSyncSelection>
 
       <SilderText>
         <Title

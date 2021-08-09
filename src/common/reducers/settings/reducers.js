@@ -272,6 +272,15 @@ function soundCategoryVoice(state = 1.0, value) {
   }
 }
 
+function vsync(state = false, action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_VSYNC:
+      return action.val;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   sounds,
   releaseChannel,
@@ -299,5 +308,6 @@ export default combineReducers({
   soundCategoryNeutral,
   soundCategoryPlayer,
   soundCategoryAmbient,
-  soundCategoryVoice
+  soundCategoryVoice,
+  vsync
 });

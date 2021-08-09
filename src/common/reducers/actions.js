@@ -2077,6 +2077,7 @@ export function downloadInstance(instanceName) {
     const { soundCategoryPlayer } = state.settings;
     const { soundCategoryAmbient } = state.settings;
     const { soundCategoryVoice } = state.settings;
+    const { vsync } = state.settings;
 
     const data =
       `fullscreen:${fullScreen}\n` +
@@ -2094,7 +2095,8 @@ export function downloadInstance(instanceName) {
       `soundCategory_neutral:${soundCategoryNeutral}\n` +
       `soundCategory_player:${soundCategoryPlayer}\n` +
       `soundCategory_ambient:${soundCategoryAmbient}\n` +
-      `soundCategory_voice:${soundCategoryVoice}`;
+      `soundCategory_voice:${soundCategoryVoice}\n` +
+      `enableVsync:${vsync}`;
 
     try {
       if (!fss.existsSync(filePath)) {

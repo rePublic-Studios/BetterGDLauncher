@@ -260,3 +260,12 @@ export function updateSoundCategoryVoice(val) {
     });
   };
 }
+
+export function updateVSync(val) {
+  return dispatch => {
+    dispatch({
+      type: ActionTypes.UPDATE_VSYNC,
+      val
+    });
+  };
+}
