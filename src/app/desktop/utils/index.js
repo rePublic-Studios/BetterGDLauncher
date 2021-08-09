@@ -21,8 +21,8 @@ import {
 } from '../../../common/utils';
 import {
   getAddonFile,
-  mcGetPlayerSkin,
-  mcElyByGetPlayerSkin
+  mojangPlayerSkinServiceUrl,
+  elyByPlayerSkinServiceUrl
 } from '../../../common/api';
 import { downloadFile } from './downloader';
 
@@ -791,16 +791,16 @@ export const downloadAddonZip = async (id, fileID, instancePath, tempPath) => {
   return manifest;
 };
 
-export const getPlayerSkin = async uuid => {
-  const playerSkin = await mcGetPlayerSkin(uuid);
+export const mojangPlayerSkinService = async uuid => {
+  const playerSkin = await mojangPlayerSkinServiceUrl(uuid);
   const { data } = playerSkin;
   const base64 = data.properties[0].value;
   const decoded = JSON.parse(Buffer.from(base64, 'base64').toString());
   return decoded?.textures?.SKIN?.url;
 };
 
-export const getElyByPlayerSkin = async name => {
-  const playerSkin = await mcElyByGetPlayerSkin(name);
+export const elyByPlayerSkinService = async name => {
+  const playerSkin = await elyByPlayerSkinServiceUrl(name);
   if (playerSkin.status === 204) return null;
   const { data } = playerSkin;
   const base64 = data.properties[0].value;

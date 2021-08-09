@@ -154,7 +154,7 @@ export const mcRefresh = (accessToken, clientToken) => {
   );
 };
 
-export const mcGetPlayerSkin = uuid => {
+export const mojangPlayerSkinServiceUrl = uuid => {
   return axios.get(
     `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`
   );
@@ -225,7 +225,7 @@ export const mcElyByRefresh = (accessToken, clientToken) => {
   );
 };
 
-export const mcElyByGetPlayerSkin = name => {
+export const elyByPlayerSkinServiceUrl = name => {
   return axios.get(`http://skinsystem.ely.by/profile/${name}`);
 };
 

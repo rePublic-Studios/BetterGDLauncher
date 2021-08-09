@@ -16,7 +16,7 @@ import {
 } from '../reducers/actions';
 import { load } from '../reducers/loading/actions';
 import features from '../reducers/loading/features';
-import { ACCOUNT_MICROSOFT } from '../utils/constants';
+import { ACCOUNT_LOCAL, ACCOUNT_MICROSOFT } from '../utils/constants';
 
 const ProfileSettings = () => {
   const dispatch = useDispatch();
@@ -96,22 +96,25 @@ const ProfileSettings = () => {
                         color: ${props => props.theme.palette.error.main};
                       `}
                     >
-                      {!account.accessToken && '(EXPIRED)'}
+                      {!account.accessToken &&
+                        account.accountType !== ACCOUNT_LOCAL &&
+                        '(EXPIRED)'}
                     </span>
                   </div>
-                  {!account.accessToken && (
-                    <HoverContainer
-                      onClick={() =>
-                        dispatch(
-                          openModal('AddAccount', {
-                            username: account.user.username
-                          })
-                        )
-                      }
-                    >
-                      Login again
-                    </HoverContainer>
-                  )}
+                  {!account.accessToken &&
+                    account.accountType !== ACCOUNT_LOCAL && (
+                      <HoverContainer
+                        onClick={() =>
+                          dispatch(
+                            openModal('AddAccount', {
+                              username: account.user.username
+                            })
+                          )
+                        }
+                      >
+                        Login again
+                      </HoverContainer>
+                    )}
                   {account.selectedProfile.id ===
                     currentAccount.selectedProfile.id && (
                     <Spin spinning={isLoading.isRequesting} />

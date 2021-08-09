@@ -246,7 +246,7 @@ const General = () => {
   const changeDataPath = async () => {
     setLoadingMoveUserData(true);
     const appData = await ipcRenderer.invoke('getAppdataPath');
-    const appDataPath = path.join(appData, 'gdlauncher_next');
+    const appDataPath = path.join(appData, 'bettergdlauncher');
 
     const notCopiedFiles = [
       'Cache',
@@ -600,7 +600,7 @@ const General = () => {
             `}
             onClick={async () => {
               const appData = await ipcRenderer.invoke('getAppdataPath');
-              const appDataPath = path.join(appData, 'gdlauncher_next');
+              const appDataPath = path.join(appData, 'bettergdlauncher');
               setDataPath(appDataPath);
             }}
           >

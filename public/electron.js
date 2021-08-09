@@ -159,7 +159,7 @@ try {
   // Do nothing
 }
 
-app.setPath('userData', path.join(app.getPath('appData'), 'gdlauncher_next'));
+app.setPath('userData', path.join(app.getPath('appData'), 'bettergdlauncher'));
 
 let allowUnstableReleases = false;
 const releaseChannelExists = fss.existsSync(
