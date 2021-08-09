@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from '../components/Modal';
-import Logo from '../../ui/LogoSad';
+import Logo from '../../ui/Logo';
 
 const calcError = code => {
   switch (code) {

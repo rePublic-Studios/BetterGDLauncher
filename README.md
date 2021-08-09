@@ -7,8 +7,8 @@
 ## Pre-built binaries:
 
 - All releases: https://github.com/rePublic-Studios/BetterGDLauncher/releases
-  - [latest setup](https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.2/BetterGDLauncher-win-setup.exe)
-  - [latest portable](https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.2/BetterGDLauncher-win-portable.zip)
+  - [latest setup](https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.3/BetterGDLauncher-win-setup.exe)
+  - [latest portable](https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.3/BetterGDLauncher-win-portable.zip)
 
 # BetterGDLauncher
 
@@ -57,6 +57,5 @@ To download the latest version, you can click [here](https://github.com/rePublic
 - Overhaul the UI
 - One Setting for all Instances
 - A lot more...
-
 
 > This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
