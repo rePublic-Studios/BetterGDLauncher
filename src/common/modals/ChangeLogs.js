@@ -30,8 +30,8 @@ const ChangeLogs = () => {
           </SectionTitle>
           <div>
             <ul>
-              <li>Major stability fixxes</li>
-              <li>Patched Download Bug for new forge versions</li>
+              <li>Added global instance settings for minecraft!</li>
+              <li>Added offline Accounts!</li>
               <li>All known Bugs are fixxed</li>
             </ul>
           </div>

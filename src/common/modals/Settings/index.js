@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import Modal from '../../components/Modal';
 import General from './components/General';
 import Java from './components/Java';
+import GameSetting from './components/GameSettings';
+import VideoSetting from './components/VideoSettings';
+import SoundSetting from './components/SoundSettings';
 import CloseButton from '../../components/CloseButton';
 import { closeModal } from '../../reducers/modals/actions';
 
@@ -85,6 +88,12 @@ function Page(page) {
       return <General />;
     case 'Java':
       return <Java />;
+    case 'GameSetting':
+      return <GameSetting />;
+    case 'VideoSetting':
+      return <VideoSetting />;
+    case 'SoundSetting':
+      return <SoundSetting />;
     default:
       return null;
   }
@@ -124,12 +133,28 @@ export default function Settings() {
           >
             Java
           </SettingsButton>
-          {/* <SettingsButton onClick={() => setPage("User Interface")}>
-            User Interface
+
+          <SettingsTitle>Minecraft</SettingsTitle>
+          <SettingsButton
+            active={page === 'GameSetting'}
+            onClick={() => setPage('GameSetting')}
+          >
+            Game Settings
           </SettingsButton>
-          <SettingsTitle>Game Settings</SettingsTitle>
-          <SettingsButton>Graphic Settings</SettingsButton>
-          <SettingsButton>Sound Settings</SettingsButton> */}
+
+          <SettingsButton
+            active={page === 'VideoSetting'}
+            onClick={() => setPage('VideoSetting')}
+          >
+            Video Settings
+          </SettingsButton>
+
+          <SettingsButton
+            active={page === 'SoundSetting'}
+            onClick={() => setPage('SoundSetting')}
+          >
+            Sound Settings
+          </SettingsButton>
         </SideMenu>
         <SettingsContainer>
           <SettingsColumn>

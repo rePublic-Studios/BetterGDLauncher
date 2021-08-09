@@ -19,7 +19,7 @@ import Seven, { extractFull } from 'node-7z';
 import { push } from 'connected-react-router';
 import { spawn } from 'child_process';
 import symlink from 'symlink-dir';
-import fss, { promises as fs } from 'fs';
+import fss, { promises as fsp } from 'fs';
 import originalFs from 'original-fs';
 import pMap from 'p-map';
 import makeDir from 'make-dir';
@@ -1108,17 +1108,17 @@ export function updateInstanceConfig(
         });
 
         const readBuff = Buffer.alloc(50);
-        const newFile = await fs.open(tempP, 'r');
+        const newFile = await fsp.open(tempP, 'r');
         await newFile.read(readBuff, 0, 50, null);
 
         if (readBuff.every(v => v === 0)) {
           throw new Error('Corrupted file');
         }
-        await fs.rename(tempP, p);
+        await fsp.rename(tempP, p);
       };
 
       try {
-        await fs.access(configPath);
+        await fsp.access(configPath);
         await writeFileToDisk(JsonString, tempConfigPath, configPath);
       } catch {
         if (forceWrite) {
@@ -1310,9 +1310,9 @@ export function downloadForge(instanceName) {
     };
 
     try {
-      await fs.access(expectedInstaller);
+      await fsp.access(expectedInstaller);
       if (!pre152) {
-        await fs.access(forgeJsonPath);
+        await fsp.access(forgeJsonPath);
       }
       const { data: hashes } = await axios.get(
         `https://files.minecraftforge.net/net/minecraftforge/forge/${loader?.loaderVersion}/meta.json`
@@ -1405,7 +1405,7 @@ export function downloadForge(instanceName) {
         );
         await extractSpecificFile(forgeBinPathInsideZip);
 
-        const filesToMove = await fs.readdir(
+        const filesToMove = await fsp.readdir(
           path.join(_getTempPath(state), forgeBinPathInsideZip)
         );
         await Promise.all(
@@ -2013,6 +2013,74 @@ export function downloadInstance(instanceName) {
     else if (manifest && loader?.source === CURSEFORGE)
       await dispatch(processForgeManifest(instanceName));
 
+    // Adding global settings
+
+    const instancePath = path.join(_getInstancesPath(state), instanceName);
+    const filePath = `${instancePath}/options.txt`;
+
+    const fullScreen = state.settings.fullscreen;
+    const { autoJump } = state.settings;
+    const { guiScale } = state.settings;
+    const { fov } = state.settings;
+    const { fps } = state.settings;
+    const { renderDistance } = state.settings;
+    const { soundCategoryMaster } = state.settings;
+    const { soundCategoryMusik } = state.settings;
+    const { soundCategoryJukebox } = state.settings;
+    const { soundCategoryWeather } = state.settings;
+    const { soundCategoryBlocks } = state.settings;
+    const { soundCategoryHostile } = state.settings;
+    const { soundCategoryNeutral } = state.settings;
+    const { soundCategoryPlayer } = state.settings;
+    const { soundCategoryAmbient } = state.settings;
+    const { soundCategoryVoice } = state.settings;
+
+    const data =
+      `fullscreen:${fullScreen}\n` +
+      `autoJump:${autoJump}\n` +
+      `guiScale:${guiScale}\n` +
+      `fov:${fov}\n` +
+      `maxFps:${fps}\n` +
+      `renderDistance:${renderDistance}\n` +
+      `soundCategory_master:${soundCategoryMaster}\n` +
+      `soundCategory_music:${soundCategoryMusik}\n` +
+      `soundCategory_record:${soundCategoryJukebox}\n` +
+      `soundCategory_weather:${soundCategoryWeather}\n` +
+      `soundCategory_blocks:${soundCategoryBlocks}\n` +
+      `soundCategory_hostile:${soundCategoryHostile}\n` +
+      `soundCategory_neutral:${soundCategoryNeutral}\n` +
+      `soundCategory_player:${soundCategoryPlayer}\n` +
+      `soundCategory_ambient:${soundCategoryAmbient}\n` +
+      `soundCategory_voice:${soundCategoryVoice}`;
+
+    try {
+      if (!fss.existsSync(filePath)) {
+        fss.writeFile(filePath, data, err => {
+          // In case of a error throw err.
+          if (err) throw err;
+        });
+      }
+      /* TODO
+      else{
+        fs.readFile(filePath, 'utf8' , (err, datas) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+
+          var splitted = data.split("\n");
+          for(var i=0; i < splitted.length; i++) {
+            var regex = new RegExp("(?<=" + splitted[i].split(":")[0] + ":)(.*)(?=\n)", "g");
+            var result = datas.replace(regex, splitted[i].split(":")[1]);
+            
+            console.log(result);
+          }
+        })
+      } */
+    } catch (err) {
+      console.error(err);
+    }
+
     dispatch(updateDownloadProgress(0));
 
     // Be aware that from this line the installer lock might be unlocked!
@@ -2042,7 +2110,7 @@ export const changeModpackVersion = (instanceName, newModpackData) => {
       await Promise.all(
         (instance?.overrides || []).map(async v => {
           try {
-            await fs.stat(path.join(instancePath, v));
+            await fsp.stat(path.join(instancePath, v));
             await fse.remove(path.join(instancePath, v));
           } catch {
             // Swallow error
@@ -2071,7 +2139,7 @@ export const changeModpackVersion = (instanceName, newModpackData) => {
           const modFound = instance.mods?.find(v => v?.projectID === projectID);
           if (modFound?.fileName) {
             try {
-              await fs.stat(
+              await fsp.stat(
                 path.join(instancePath, 'mods', modFound?.fileName)
               );
               await fse.remove(
@@ -2209,7 +2277,7 @@ export const startListener = () => {
           mod => mod.fileName === path.basename(fileName)
         );
         try {
-          const stat = await fs.lstat(fileName);
+          const stat = await fsp.lstat(fileName);
 
           if (instance?.mods && !isInConfig && stat.isFile() && instance) {
             // get murmur hash
@@ -2468,7 +2536,7 @@ export const startListener = () => {
           ) {
             try {
               await new Promise(resolve => setTimeout(resolve, 300));
-              await fs.open(completePath, 'r+');
+              await fsp.open(completePath, 'r+');
               changesTracker[completePath].completed = true;
             } catch {
               // Do nothing, simply not completed..
@@ -2783,7 +2851,7 @@ export function launchInstance(instanceName) {
 
     const configPath = path.join(instancePath, 'config.json');
     const backupConfigPath = path.join(instancePath, 'config.bak.json');
-    await fs.copyFile(configPath, backupConfigPath);
+    await fsp.copyFile(configPath, backupConfigPath);
 
     const instanceJLFPath = path.join(
       _getInstancesPath(state),
@@ -2833,7 +2901,7 @@ export function launchInstance(instanceName) {
           getForgeLastVer(loader?.loaderVersion) > 935
         ) {
           const moveJavaLegacyFixerToInstance = async () => {
-            await fs.lstat(path.join(_getDataStorePath(state), '__JLF__.jar'));
+            await fsp.lstat(path.join(_getDataStorePath(state), '__JLF__.jar'));
             await fse.move(
               path.join(_getDataStorePath(state), '__JLF__.jar'),
               instanceJLFPath
@@ -2987,7 +3055,7 @@ export function launchInstance(instanceName) {
       dispatch(removeStartedInstance(instanceName));
       await fse.remove(instanceJLFPath);
       if (process.platform === 'win32') fse.remove(symLinkDirPath);
-      await fs.unlink(backupConfigPath);
+      await fsp.unlink(backupConfigPath);
       if (code !== 0 && errorLogs) {
         dispatch(
           openModal('InstanceCrashed', {
@@ -3198,7 +3266,7 @@ export const getAppLatestVersion = async () => {
   let releaseChannel = 0;
 
   try {
-    const rChannel = await fs.readFile(
+    const rChannel = await fsp.readFile(
       path.join(appData, 'gdlauncher_next', 'rChannel')
     );
     releaseChannel = rChannel.toString();

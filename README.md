@@ -5,8 +5,8 @@
 ## Pre-built binaries:
 
 - Windows: https://github.com/rePublic-Studios/BetterGDLauncher/releases
-- - direct setup: <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.0/BetterGDLauncher-win-setup.exe">BetterGDLauncher-win-setup.exe</a>
-- - direct portable: <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.0/BetterGDLauncher-win-portable.zip">BetterGDLauncher-win-portable.zip</a>
+- - direct setup: <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.2/BetterGDLauncher-win-setup.exe">BetterGDLauncher-win-setup.exe</a>
+- - direct portable: <a href="https://github.com/rePublic-Studios/BetterGDLauncher/releases/download/v1.4.2/BetterGDLauncher-win-portable.zip">BetterGDLauncher-win-portable.zip</a>
 
 Details about the original launcher below:
 
