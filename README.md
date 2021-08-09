@@ -1,6 +1,4 @@
-> **This is a better version of a popular Minecraft launcher that lets you play the game without a Mojang account. :)**
->
-> This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
+![rePublicLogoHori](https://user-images.githubusercontent.com/31509082/128656167-b5b25f81-be27-4ae8-8408-00d4396a942e.png)
 
 ## You can join us here:
 
@@ -59,3 +57,6 @@ To download the latest version, you can click [here](https://github.com/rePublic
 - Overhaul the UI
 - One Setting for all Instances
 - A lot more...
+
+
+> This software is not related to GDLauncher developers and provided without any warranty. Please don't bomb GDLauncher developers if something gets wrong using this launcher.
