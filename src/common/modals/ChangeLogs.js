@@ -30,9 +30,7 @@ const ChangeLogs = () => {
           </SectionTitle>
           <div>
             <ul>
-              <li>Added global instance settings for minecraft!</li>
-              <li>Added offline Accounts!</li>
-              <li>All known Bugs are fixxed</li>
+              <li>Added V-Sync to options</li>
             </ul>
           </div>
         </Section>
