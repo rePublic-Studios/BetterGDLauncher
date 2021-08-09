@@ -137,7 +137,7 @@ function fullscreen(state = true, action) {
   }
 }
 
-function fov(state = 70, value) {
+function fov(state = 0.0, value) {
   switch (value.type) {
     case ActionTypes.UPDATE_FOV:
       return value.val;
