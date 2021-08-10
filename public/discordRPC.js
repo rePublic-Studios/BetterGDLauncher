@@ -5,6 +5,7 @@ let client;
 let activity;
 
 exports.initRPC = () => {
+  exports.shutdownRPC();
   client = new Client({ transport: 'ipc' });
 
   activity = {
@@ -13,7 +14,13 @@ exports.initRPC = () => {
     startTimestamp: Math.floor(Date.now() / 1000),
     largeImageKey: 'default_big',
     largeImageText: 'BetterGDLauncher - A Custom Minecraft Launcher',
-    instance: false
+    buttons: [
+      { label: 'Join Discord', url: 'https://discord.gg/FFw9vYMQA6' },
+      {
+        label: 'Github',
+        url: 'https://github.com/rePublic-Studios/BetterGDLauncher'
+      }
+    ]
   };
 
   client.on('ready', () => {
@@ -32,6 +39,7 @@ exports.initRPC = () => {
 
 exports.updateDetails = details => {
   activity.details = details;
+  console.log(activity);
   client.setActivity(activity);
 };
 

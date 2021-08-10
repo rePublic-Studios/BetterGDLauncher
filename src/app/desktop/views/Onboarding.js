@@ -229,7 +229,7 @@ const Home = () => {
             }
           `}
           onClick={() => {
-            if (currentSlide === 4) {
+            if (currentSlide === 3) {
               dispatch(push('/home'));
             } else {
               executeScroll(1);
@@ -237,7 +237,7 @@ const Home = () => {
           }}
         >
           <FontAwesomeIcon
-            icon={currentSlide === 4 ? faLongArrowAltRight : faLongArrowAltDown}
+            icon={currentSlide === 3 ? faLongArrowAltRight : faLongArrowAltDown}
           />
         </div>
       )}
