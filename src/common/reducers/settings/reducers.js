@@ -146,7 +146,7 @@ function fov(state = 0.0, value) {
   }
 }
 
-function fps(state = 60, value) {
+function fps(state = 90, value) {
   switch (value.type) {
     case ActionTypes.UPDATE_FPS:
       return value.val;
