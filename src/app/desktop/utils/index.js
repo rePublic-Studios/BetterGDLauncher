@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import originalFs from 'original-fs';
 import fse from 'fs-extra';
+import axios from 'axios';
 import { extractFull } from 'node-7z';
 import jimp from 'jimp/es';
 import makeDir from 'make-dir';
@@ -21,8 +22,8 @@ import {
 } from '../../../common/utils';
 import {
   getAddonFile,
-  mojangPlayerSkinServiceUrl,
-  elyByPlayerSkinServiceUrl
+  mojangSessionServerUrl,
+  elyBySkinSystemUrl
 } from '../../../common/api';
 import { downloadFile } from './downloader';
 
@@ -791,26 +792,58 @@ export const downloadAddonZip = async (id, fileID, instancePath, tempPath) => {
   return manifest;
 };
 
+const defaultskin =
+  'iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA6lBMVEUAAADlmUfljT/YgDLckzzonUyqiV6ce1DfxqPr07Py2rrky6n7+/sjYiTy3cLu1rbv2bvy273u17nvu7FkQSwoKCh6tXeGh2FoRTB6r3fYupR5VT2AWkBtSjOMvop9snqBtX+LuohyTjZvTDWKi2aMjWh3r3WAglqHiWKPkGuGXkZ9tHrkyag7Ozt4VDxGRkZJSUlaWlpdXV1NTU1XV1fp0K/s1Ljky6phYWFra2vp0bPv2b3ly63v2r8YOBYaPxlPgEx3sHRSUlJjY2NKSkpQUFDy38jq1LhcXFw/Pz9wcHBISEhMTEx1UDg5NQK9AAAAAXRSTlMAQObYZgAAAypJREFUeNqczkd2A0EQw1ADU5RdbWXd/67K6wnY8z/+fANBnD79rE2EItO0e7QBoIIl0+730W7DgwpgbQeMmPrbCiAWyWagFPABPNsABBNTf59WXA9JRBRBxCAicRaQ71QK/GoJJjILJCIBqW6MGkxiWAJQkCqqqsf/P1CYYAziLFBAddf//jCOh/1/CYgIgcwDpvo4xuk8juNyHV0I0aCBWUBCj+PxMb/dxuhjl0hUAs4CSD8fjIfwdLoEEQP3dsujK3IYCMJkkA46eT0SNu2RTc5RRHvImf//d7Z6Ld56nmDiderSrcfU12qSCtebGkQR9Af6PsetWWh+WntNeRljlsXyQABodno+AMSDA5aWWj8CxLIYCCCkxHciXCEEgBobnaQrOtIRUZbFOBMD+Ffx358J/1jbFtMN2Yw/bsk2pxuj8ySBX0dFmuYxf3AVAMk/RWP476TdthbTY5sRf9laagJgLVKd1zXJDQOyNSHwa8CmNkQWAFzNEhdD3YAIs3XSBVgnWlubnsc6JibL9sxubG5utLZavjQBULG9XXDVEE8CIKP5HVzbA4hoFxJC+NIA7O3tRXp/X0doDiCDqRlc7DOQxYFP7JOSEUIK2QAcHh7uHR0fH+2hOTk9PWEAUY3gdTDd4kjwA3Am3LmTUjUB0MXl5QVXBsQQ0Tp7AOAeLQ5OOHEl5bW7KaW86gLs1YC9GlB1qs4tAOtEtx3uie5wuHXQlVKudE6p5g1OTu73jh4ejvbuT04en54esYGpqgreqmNwBVTmdJwrS6WeGfCsXroBr3yD1wbA8trWkuGeV0Bflq58flYl6nPXDd7e3l4f3t8fXtF8fH5+mBgm/QVpW8OIZd01AFjBecBEE0000Uh5Yd4/6yMDpufHBczwsz4GYCYeAsA5YSVNNNci48cFL7x/5WhmkOlw6iTJv/MCjPPTAAS5oBcg12nx/7nnXJAFuaDH/gDwBh4Q5ILeCvNCkAt6K8wLQS7orTAv8FwJghM+F/RWmBdgvL5iwM1AgDAv+FxQlwEAQV7g51ipq7oMAAjyQslO5AIQ1PNzT+vPeaEUiCQ+2vwE+AvPvqCUbKfGoQAAAABJRU5ErkJggg==';
+
+const getBase64 = url => {
+  return axios
+    .get(url, {
+      responseType: 'arraybuffer'
+    })
+    .then(response => Buffer.from(response.data, 'binary').toString('base64'));
+};
+
 export const mojangPlayerSkinService = async uuid => {
-  const playerSkin = await mojangPlayerSkinServiceUrl(uuid);
+  let skin = defaultskin;
+  const playerSkin = await mojangSessionServerUrl('profile', uuid);
+  if (playerSkin.status === 204) return skin;
   const { data } = playerSkin;
   const base64 = data.properties[0].value;
   const decoded = JSON.parse(Buffer.from(base64, 'base64').toString());
-  return decoded?.textures?.SKIN?.url;
+
+  if (decoded?.textures?.SKIN?.url)
+    skin = await getBase64(decoded?.textures?.SKIN?.url);
+  return skin;
 };
 
 export const elyByPlayerSkinService = async name => {
-  const playerSkin = await elyByPlayerSkinServiceUrl(name);
-  if (playerSkin.status === 204) return null;
-  const { data } = playerSkin;
-  const base64 = data.properties[0].value;
-  const decoded = JSON.parse(Buffer.from(base64, 'base64').toString());
-  return decoded?.textures?.SKIN?.url;
+  let skin = defaultskin;
+  const playerTexture = await elyBySkinSystemUrl('textures', name);
+  if (playerTexture.status === 204) return skin;
+  const { data } = playerTexture;
+
+  if (data?.SKIN?.url) {
+    skin = await getBase64(data?.SKIN?.url);
+  }
+  return skin;
+};
+
+const isBase64 = text => {
+  try {
+    return Buffer.from(text, 'base64').toString('base64') === text;
+  } catch (_) {
+    return false;
+  }
 };
 
 export const extractFace = async buffer => {
-  const face = await jimp.read(buffer);
-  const hat = await jimp.read(buffer);
+  const face = await jimp.read(
+    isBase64(buffer) ? Buffer.from(buffer, 'base64') : buffer
+  );
+  const hat = await jimp.read(
+    isBase64(buffer) ? Buffer.from(buffer, 'base64') : buffer
+  );
+
   face.crop(8, 8, 8, 8);
   hat.crop(40, 8, 8, 8);
   face.scale(10, jimp.RESIZE_NEAREST_NEIGHBOR);

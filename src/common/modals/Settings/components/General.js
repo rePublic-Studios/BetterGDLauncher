@@ -177,6 +177,12 @@ function copy(setCopied, copyText) {
   }, 500);
 }
 
+const firstLetterCaps = name => {
+  const firstLetter = name.substring(0, 1).toUpperCase();
+  const restLetters = name.substring(1).toLowerCase();
+  return firstLetter + restLetters;
+};
+
 function dashUuid(UUID) {
   // UUID is segmented into: 8 - 4 - 4 - 4 - 12
   // Then dashes are added between.
@@ -308,7 +314,13 @@ const General = () => {
             `}
           >
             <UsernameContainer>
-              Username <br />
+              Username{' '}
+              {currentAccount.accountType
+                ? ` (${firstLetterCaps(
+                    currentAccount.accountType.replace('ACCOUNT_', '')
+                  )})`
+                : ``}
+              <br />
               <Username>{currentAccount.selectedProfile.name}</Username>
             </UsernameContainer>
             <UuidContainer>

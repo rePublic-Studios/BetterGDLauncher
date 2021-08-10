@@ -30,7 +30,18 @@ const ChangeLogs = () => {
           </SectionTitle>
           <div>
             <ul>
-              <li>Added V-Sync to options</li>
+              <li>Added buttons to discordrpc</li>
+              <li>Better image sizes for logos</li>
+              <li>Launch instance from cli</li>
+              <li>Fixxed Accountmanager to select offline accounts </li>
+              <li>Fixxed Autologin of offline Accounts on restart </li>
+              <li>Added Default Skin, to fix skinerrors </li>
+              <li>Better Servicemanagement for API's</li>
+              <li>Fixxed Sliders for new users</li>
+              <li>Added Accounttype in settings</li>
+              <li>Some minimal changes</li>
+              <li />
+              <li>Prepare for a own repo</li>
             </ul>
           </div>
         </Section>

@@ -12,7 +12,8 @@ import {
   loginWithAccessToken,
   updateAccount,
   removeAccount,
-  loginWithOAuthAccessToken
+  loginWithOAuthAccessToken,
+  localLogin
 } from '../reducers/actions';
 import { load } from '../reducers/loading/actions';
 import features from '../reducers/loading/features';
@@ -55,7 +56,8 @@ const ProfileSettings = () => {
                       isLoading.isRequesting ||
                       account.selectedProfile.id ===
                         currentAccount.selectedProfile.id ||
-                      !account.accessToken
+                      (!account.accessToken &&
+                        account.accountType !== ACCOUNT_LOCAL)
                     ) {
                       return;
                     }
@@ -66,11 +68,19 @@ const ProfileSettings = () => {
                     dispatch(
                       load(
                         features.mcAuthentication,
-                        dispatch(
-                          account.accountType === ACCOUNT_MICROSOFT
-                            ? loginWithOAuthAccessToken(false)
-                            : loginWithAccessToken(false)
-                        )
+                        dispatch(() => {
+                          switch (account.accountType) {
+                            case ACCOUNT_MICROSOFT:
+                              loginWithOAuthAccessToken(false);
+                              break;
+                            case ACCOUNT_LOCAL:
+                              localLogin(false);
+                              break;
+                            default:
+                              loginWithAccessToken(false);
+                              break;
+                          }
+                        })
                       )
                     ).catch(() => {
                       dispatch(updateCurrentAccountId(currentId));
@@ -82,6 +92,7 @@ const ProfileSettings = () => {
                       );
                       message.error('Account not valid');
                     });
+                    dispatch(closeModal());
                   }}
                 >
                   <div>

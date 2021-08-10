@@ -8,7 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from '../components/Modal';
 import { load } from '../reducers/loading/actions';
 import features from '../reducers/loading/features';
-import { login, loginElyBy, loginOAuth, loginLocal } from '../reducers/actions';
+import {
+  mojangLogin,
+  elyByLogin,
+  loginOAuth,
+  localLogin
+} from '../reducers/actions';
 import { closeModal } from '../reducers/modals/actions';
 import {
   ACCOUNT_MOJANG,
@@ -25,9 +30,12 @@ const AddAccount = ({ username }) => {
   const [selectedSerivce, setSelectedService] = useState('Mojang Account');
   const [loginFailed, setLoginFailed] = useState();
 
-  const addAccount = () => {
+  const addMojangAccount = () => {
     dispatch(
-      load(features.mcAuthentication, dispatch(login(email, password, false)))
+      load(
+        features.mcAuthentication,
+        dispatch(mojangLogin(email, password, false))
+      )
     )
       .then(() => dispatch(closeModal()))
       .catch(error => {
@@ -40,7 +48,7 @@ const AddAccount = ({ username }) => {
     dispatch(
       load(
         features.mcAuthentication,
-        dispatch(loginElyBy(email, password, false))
+        dispatch(elyByLogin(email, password, false))
       )
     )
       .then(() => dispatch(closeModal()))
@@ -60,7 +68,7 @@ const AddAccount = ({ username }) => {
   };
   const addLocalAccount = () => {
     dispatch(
-      load(features.mcAuthentication, dispatch(loginLocal(email, false)))
+      load(features.mcAuthentication, dispatch(localLogin(email, false)))
     )
       .then(() => dispatch(closeModal()))
       .catch(error => {
@@ -89,10 +97,11 @@ const AddAccount = ({ username }) => {
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addMojangAccount()}
         />
       </FormContainer>
       <FormContainer>
-        <StyledButton onClick={addAccount}>Add Account</StyledButton>
+        <StyledButton onClick={addMojangAccount}>Add Account</StyledButton>
       </FormContainer>
     </Container>
   );
@@ -117,6 +126,7 @@ const AddAccount = ({ username }) => {
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addElyByAccount()}
         />
       </FormContainer>
       <FormContainer>
@@ -171,6 +181,7 @@ const AddAccount = ({ username }) => {
           placeholder="Username"
           value={email}
           onChange={e => setEmail(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addLocalAccount()}
         />
       </FormContainer>
       <FormContainer>

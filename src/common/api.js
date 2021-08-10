@@ -154,10 +154,14 @@ export const mcRefresh = (accessToken, clientToken) => {
   );
 };
 
-export const mojangPlayerSkinServiceUrl = uuid => {
+export const mojangSessionServerUrl = (url, uuid) => {
   return axios.get(
-    `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`
+    `https://sessionserver.mojang.com/session/minecraft/${url}/${uuid}`
   );
+};
+
+export const mojangApiProfilesUrl = name => {
+  return axios.get(`https://api.mojang.com/users/profiles/minecraft/${name}`);
 };
 
 export const imgurPost = (image, onProgress) => {
@@ -225,8 +229,8 @@ export const mcElyByRefresh = (accessToken, clientToken) => {
   );
 };
 
-export const elyByPlayerSkinServiceUrl = name => {
-  return axios.get(`http://skinsystem.ely.by/profile/${name}`);
+export const elyBySkinSystemUrl = (url, name) => {
+  return axios.get(`http://skinsystem.ely.by/${url}/${name}`);
 };
 
 export const mcElyByInvalidate = (accessToken, clientToken) => {

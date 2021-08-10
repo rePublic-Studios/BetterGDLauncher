@@ -15,10 +15,10 @@ import { DownOutlined } from '@ant-design/icons';
 import { useKey } from 'rooks';
 import axios from 'axios';
 import {
-  login,
-  loginElyBy,
+  mojangLogin,
+  elyByLogin,
   loginOAuth,
-  loginLocal
+  localLogin
 } from '../../../common/reducers/actions';
 import { load, requesting } from '../../../common/reducers/loading/actions';
 import features from '../../../common/reducers/loading/features';
@@ -189,12 +189,12 @@ const Login = () => {
   );
   const [accountType, setAccountType] = useState(ACCOUNT_MOJANG);
 
-  const authenticate = () => {
+  const authenticateMojang = () => {
     if (!email || !password) return;
     dispatch(requesting('accountAuthentication'));
     setTimeout(() => {
       dispatch(
-        load(features.mcAuthentication, dispatch(login(email, password)))
+        load(features.mcAuthentication, dispatch(mojangLogin(email, password)))
       ).catch(e => {
         console.error(e);
         setLoginFailed(e);
@@ -207,7 +207,7 @@ const Login = () => {
     dispatch(requesting('accountAuthentication'));
     setTimeout(() => {
       dispatch(
-        load(features.mcAuthentication, dispatch(loginElyBy(email, password)))
+        load(features.mcAuthentication, dispatch(elyByLogin(email, password)))
       ).catch(e => {
         console.error(e);
         setLoginFailed(e);
@@ -233,7 +233,7 @@ const Login = () => {
     dispatch(requesting('accountAuthentication'));
     setTimeout(() => {
       dispatch(
-        load(features.mcAuthentication, dispatch(loginLocal(email)))
+        load(features.mcAuthentication, dispatch(localLogin(email)))
       ).catch(e => {
         console.error(e);
         setLoginFailed(e);
@@ -259,12 +259,13 @@ const Login = () => {
             type="password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
+            onKeyDown={e => e.key === 'Enter' && authenticateMojang()}
           />
         </div>
         {loginFailed && (
           <LoginFailMessage>{loginFailed?.message}</LoginFailMessage>
         )}
-        <LoginButton color="primary" onClick={authenticate}>
+        <LoginButton color="primary" onClick={authenticateMojang}>
           Sign In
           <FontAwesomeIcon
             css={`
@@ -331,6 +332,7 @@ const Login = () => {
             type="password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
+            onKeyDown={e => e.key === 'Enter' && authenticateElyBy()}
           />
         </div>
         {loginFailed && (
@@ -430,6 +432,7 @@ const Login = () => {
             placeholder="Username"
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
+            onKeyDown={e => e.key === 'Enter' && authenticateLocal()}
           />
         </div>
         <LoginButton color="primary" onClick={authenticateLocal}>
@@ -451,16 +454,6 @@ const Login = () => {
             width: 100%;
           `}
         >
-          <FooterLinks>
-            <div>
-              <a href="https://account.ely.by/register">CREATE AN ACCOUNT</a>
-            </div>
-            <div>
-              <a href="https://account.ely.by/forgot-password">
-                FORGOT PASSWORD
-              </a>
-            </div>
-          </FooterLinks>
           <div
             css={`
               cursor: pointer;
@@ -481,7 +474,7 @@ const Login = () => {
     setStatus(result);
   };
 
-  useKey(['Enter'], authenticate);
+  useKey(['Enter'], authenticateMojang);
 
   useEffect(() => {
     ipcRenderer.invoke('getAppVersion').then(setVersion).catch(console.error);
